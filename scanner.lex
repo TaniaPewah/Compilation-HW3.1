@@ -12,7 +12,7 @@ int yyerror(char const*);
 
 %option yylineno
 %option noyywrap
-whitespace		([\t\n ])
+whitespace		([\t\n\r ])
 line_break		(\r\n|\r|\n)
 id                      ([a-zA-Z][a-zA-Z0-9]*)
 num                     (0|[1-9][0-9]*)
@@ -61,12 +61,12 @@ continue                { yylval =  new Node(yylineno); return CONTINUE; }
 {line_break}            ;
 {whitespace}            ;
 {comment}               ;
-.                       { output::errorLex(yylineno); exit(0); }
+.                       { errorLexical(); }
 
 %%
 
-int yyerror(char const* message)
+int errorLexical()
 {
-    output::errorSyn(yylineno);
+    errorLex(yylineno);
     exit(0);
 }

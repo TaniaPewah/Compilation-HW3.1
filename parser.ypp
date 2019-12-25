@@ -1,0 +1,440 @@
+%{
+    #include "parser.hpp"
+
+    #include<iostream>
+    using namespace std;
+
+    int yylex();
+    int yyerror(char const*);
+    SymbolTable symbolTable;
+    void checkOpTypes(Node*, Node*, int);
+    void exitOnFalse(bool);
+
+    //#define YYERROR_VERBOSE 1
+%}
+
+%locations
+
+%token VOID INT BYTE B BOOL
+%token TRUE FALSE
+%token RETURN IF ELSE WHILE BREAK CONTINUE
+%token PRECOND
+%token SC COMMA
+%token LPAREN RPAREN LBRACE RBRACE
+%token ID NUM STRING
+
+%right NOT
+%left AND
+%left OR
+%right ASSIGN
+
+// NEED TO ADD ORDER AND ASSOC <<<<<<
+// relop
+%left EQUAL
+%left NOTEQUAL
+%nonassoc LESS
+%nonassoc GREATER
+%nonassoc LESSEQUAL
+%nonassoc GREATEREQUAL
+// binop
+%left ADD
+%left SUB
+%left MUL
+%left DIV
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%%
+
+Program :           Funcs
+                        {
+                            if (!symbolTable.hasMain){
+                                output::errorMainMissing();
+                                exit(0);
+                            }
+                        }
+;
+
+Funcs :             /*epsilon*/ 
+                    | FuncDecl Funcs
+;
+
+FuncDecl :          RetType ID LPAREN Formals RPAREN {
+                            if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
+                                output::errorDef($2->lineno, ((IdNode*)$2)->name);
+                                exit(0);
+                            }
+
+                            exitOnFalse(symbolTable.addFunction((IdNode*)$2, ((TypeNode*)$1)->type, ((FormalsNode*)$4)->types, ((FormalsNode*)$4)->names));
+                            $$ = new StatementNode();
+                        } PreConditions LBRACE Statements RBRACE { symbolTable.endScope(); }
+;
+
+RetType :           Type
+                        { $$ = $1; }
+                    | VOID
+                        { $$ = $1; }
+;
+
+Formals :           /*epsilon*/
+                        {
+                            $$ = new FormalsNode();
+                        }
+                    | FormalsList
+                        {
+                            $$ = new FormalsNode(((FormalsListNode*)$1)->types, ((FormalsListNode*)$1)->names, $1->lineno);
+                        }
+;
+
+FormalsList :       FormalDecl
+                        {
+                            $$ = new FormalsListNode(((FormalDeclNode*)$1)->type, ((FormalDeclNode*)$1)->name, $1->lineno);
+                        }
+                    | FormalDecl COMMA FormalsList
+                        {
+                            $$ = $3;
+                            ((FormalsListNode*)$$)->add(((FormalDeclNode*)$1)->type, ((FormalDeclNode*)$1)->name, $1->lineno);
+                        }
+;
+
+FormalDecl :        Type ID
+                        {
+                            if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
+                                output::errorDef($2->lineno, ((IdNode*)$2)->name);
+                                exit(0);
+                            }
+
+                            $$ = new FormalDeclNode(((TypeNode*)$1)->type, ((IdNode*)$2)->name, $2->lineno);
+                        }
+;
+
+PreConditions :     /*epsilon*/
+                        {
+                            $$ = new PreCondNode();
+                        }
+                    | PreConditions PreCondition
+                        {
+                            $$ = $2;
+                        }
+;
+
+PreCondition :      PRECOND LPAREN ExpOp RPAREN
+                        {
+                            symbolTable.addPreCondToScope();
+                            $$ = new PreCondNode();
+                        }
+;
+
+Statements :        Statement
+                        { $$ = $1; }
+                    | Statements Statement
+                        { $$ = $2; }
+;
+
+Statement :         StatementOpen 
+                        { $$ = $1; }
+                    | StatementClose
+                        { $$ = $1; }
+;
+
+BoolCondition :      LPAREN ExpOp RPAREN
+                    {
+                        if (((ExpNode*)$2)->type != BOOL_TYPE) { 
+                            output::errorMismatch($2->lineno); 
+                            exit(0);
+                        }
+                    }
+;
+
+StatementOpen :     IF BoolCondition M1 Statement 
+                        {
+                            symbolTable.endScope(); 
+
+                            $$ = $4;
+                        }
+                    | IF BoolCondition M1 StatementClose M3 ELSE M1 StatementOpen
+                        {
+                            symbolTable.endScope();
+
+                            $$ = $4;
+                        }
+                    | WHILE BoolCondition M2 StatementOpen 
+                        {
+                            symbolTable.endScope();
+
+                            $$ = $4;
+                        }
+;
+
+StatementClose :    StatementNorm 
+                    | IF BoolCondition M1 StatementClose M3 ELSE M1 StatementClose 
+                        {
+                            symbolTable.endScope();
+
+                            $$ = $4;
+                        }
+                    | WHILE BoolCondition M2 StatementClose
+                        {
+                            symbolTable.endScope();
+
+                            $$ = $4;
+                        }
+;
+
+StatementNorm :     Type ID SC
+                        {
+                            if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
+                                output::errorDef($2->lineno, ((IdNode*)$2)->name);
+                                exit(0);
+                            }
+
+                            exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
+                            $$ = new StatementNode();
+                        }
+                    | Type ID ASSIGN ExpOp SC
+                        {
+                            if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
+                                output::errorDef($2->lineno, ((IdNode*)$2)->name);
+                                exit(0);
+                            }  
+
+                            Types type = ((TypeNode*)$1)->type;
+                            Types expType = ((ExpNode*)$4)->type;
+                            if (expType != type && !(type == INT_TYPE && expType == BYTE_TYPE)){
+                                output::errorMismatch($1->lineno); 
+                                exit(0);
+                            } 
+
+                            exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
+                            $$ = new StatementNode();
+                        }
+                    | ID ASSIGN ExpOp SC 
+                        {
+                            if (!symbolTable.isDefinedVar(((IdNode*)$1)->name)) { 
+                                output::errorUndef($1->lineno, ((IdNode*)$1)->name);
+                                exit(0);
+                            }
+
+                            Types idType = symbolTable.getType(((IdNode*)$1)->name);
+                            Types expType = ((ExpNode*)$3)->type;
+                            if (idType != expType && !(idType == INT_TYPE && expType == BYTE_TYPE)){
+                                output::errorMismatch($1->lineno); 
+                                exit(0);
+                            }
+                        
+                            $$ =  new StatementNode();
+                        }
+                    | Call SC 
+                        {
+                            $$ = new StatementNode();
+                        }
+                    | RETURN SC 
+                        {
+                            if (symbolTable.getCurrentFunctionRetType() != VOID_TYPE) {
+                                output::errorMismatch($1->lineno);
+                                exit(0);
+                            }
+
+                            $$ = new StatementNode();
+                        }
+                    | RETURN ExpOp SC 
+                        {
+                            Types retType = symbolTable.getCurrentFunctionRetType();
+                            if ((retType != ((ExpNode*)$2)->type && !(retType == INT_TYPE && ((ExpNode*)$2)->type == BYTE_TYPE)) || retType == VOID_TYPE) {
+                                output::errorMismatch($1->lineno);
+                                exit(0);
+                            }
+
+                            $$ = new StatementNode();
+                        }
+                    | BREAK SC 
+                        {
+                            if (symbolTable.isInWhile() == false) {
+                                output::errorUnexpectedBreak($1->lineno);
+                                exit(0);
+                            }
+
+                            $$ = new StatementNode();
+                        }
+                    | CONTINUE SC
+                        {
+                            if (symbolTable.isInWhile() == false) {
+                                output::errorUnexpectedContinue($1->lineno);
+                                exit(0);
+                            }
+
+                            $$ = new StatementNode();
+                        }
+                    | LBRACE M1 Statements RBRACE
+                        {
+                            symbolTable.endScope(); 
+                            $$ = $2;
+                        }
+;
+
+Call :              ID LPAREN ExpList RPAREN 
+                        {
+                            if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
+                                output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
+                                exit(0);
+                            }
+
+                            vector<Types> args = symbolTable.getFunctionArgs(((IdNode*)$1)->name);
+                            if (!((ExpListNode*)$3)->compareType(args)) {
+                                vector<string> argTypes = typeToStringVector(args);
+                                output::errorPrototypeMismatch($1->lineno, ((IdNode*)$1)->name, argTypes);
+                                exit(0);
+                            } 
+                        
+                            $$ = new CallNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
+                        }
+                    | ID LPAREN RPAREN
+                        {
+                            if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
+                                output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
+                                exit(0);
+                            }
+
+                            vector<Types> args = symbolTable.getFunctionArgs(((IdNode*)$1)->name);
+                            if (args.size() != 0) {
+                                vector<string> argTypes = typeToStringVector(args);
+                                output::errorPrototypeMismatch($1->lineno, ((IdNode*)$1)->name, argTypes);
+                                exit(0);
+                            } 
+                        
+                            $$ = new CallNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
+                        }
+;
+
+ExpList :           ExpOp 
+                        { $$ = new ExpListNode(((ExpNode*)$1)->type, $1->lineno); }
+                    | ExpOp COMMA ExpList
+                        {
+                            $$ = $3; 
+                            ((ExpListNode*)$$)->add(((ExpNode*)$1)->type);
+                        }
+;
+
+Type :              INT
+                        { $$ = $1; }
+                    | BYTE
+                        { $$ = $1; }
+                    | BOOL
+                        { $$ = $1; }
+;
+
+ExpOp :             ExpOp BinOp ExpTerm
+                        {
+                            checkOpTypes($1, $3, $2->lineno);
+
+                            // Type equals the type with more range
+                            $$ = new ExpNode(max(((ExpNode*)$1)->type, ((ExpNode*)$3)->type), $2->lineno);
+                        }
+                    | ExpTerm
+                        { $$ = $1; }
+                    | NOT ExpTerm
+                        { 
+                            if (((ExpNode*)$2)->type != BOOL_TYPE) { 
+                                output::errorMismatch($2->lineno); 
+                                exit(0);
+                            } 
+
+                            $$ = $2;
+                        }
+                    | ExpOp AND ExpTerm
+                        { 
+                            if (((ExpNode*)$1)->type != BOOL_TYPE || ((ExpNode*)$3)->type != BOOL_TYPE) { 
+                                output::errorMismatch($2->lineno); 
+                                exit(0);
+                            } 
+
+                            $$ = $1;
+                        }
+                    | ExpOp OR ExpTerm 
+                        { 
+                            if (((ExpNode*)$1)->type != BOOL_TYPE || ((ExpNode*)$3)->type != BOOL_TYPE) { 
+                                output::errorMismatch($2->lineno); 
+                                exit(0);
+                            } 
+
+                            $$ = $1;
+                        }
+                    | ExpTerm RelOp ExpTerm
+                        { 
+                            checkOpTypes($1, $3, $2->lineno);
+                            $$ = new ExpNode(BOOL_TYPE, $2->lineno);
+                        }
+;
+
+ExpTerm :           LPAREN ExpOp RPAREN
+                        { $$ = $2; }
+                    | ID
+                        {
+                            if (!symbolTable.isDefinedVar(((IdNode*)$1)->name)) {
+                                output::errorUndef($1->lineno, ((IdNode*)$1)->name); 
+                                exit(0);
+                            }
+
+                            $$ = new ExpNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno); 
+                        }
+                    | Call
+                        { $$ = new ExpNode(((CallNode*)$1)->type, $1->lineno); }
+                    | NUM
+                        { $$ = new ExpNode(INT_TYPE, $1->lineno); }
+                    | NUM B
+                        {
+                            if (((NumNode*)$1)->num > 255) {
+                                output::errorByteTooLarge($1->lineno, ((NumNode*)$1)->getAsString());
+                                exit(0);
+                            }
+
+                            $$ = new ExpNode(BYTE_TYPE, $1->lineno);
+                        }
+                    | STRING
+                        { $$ = new ExpNode(STRING_TYPE, $1->lineno); }
+                    | TRUE
+                        { $$ = new ExpNode(BOOL_TYPE, $1->lineno); }
+                    | FALSE
+                        { $$ = new ExpNode(BOOL_TYPE, $1->lineno); }
+;
+
+BinOp :             ADD 
+                        { $$ = $1; }
+                    | SUB 
+                        { $$ = $1; }
+                    | MUL 
+                        { $$ = $1; }
+                    | DIV
+                        { $$ = $1; }
+;
+
+RelOp :             EQUAL 
+                        { $$ = $1; }
+                    | NOTEQUAL 
+                        { $$ = $1; }
+                    | LESS 
+                        { $$ = $1; }
+                    | GREATER 
+                        { $$ = $1; }
+                    | LESSEQUAL 
+                        { $$ = $1; }
+                    | GREATEREQUAL
+                        { $$ = $1; }
+;
+
+M1 : { symbolTable.newInnerScope(); };
+M2 : { symbolTable.newInnerScope(true /*isWhileScope*/); };
+M3 : { symbolTable.endScope(); };
+
+%%
+
+int main()
+{
+    yyparse();
+    symbolTable.endScope();
+    return 0;
+}
+
+void exitOnFalse(bool b) {
+    if (!b) {
+        exit(0);
+    }
+}

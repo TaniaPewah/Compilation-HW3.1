@@ -1,0 +1,3 @@
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/CMakeFiles/yahani.dir
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/CMakeFiles/edit_cache.dir

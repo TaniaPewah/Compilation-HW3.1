@@ -14,6 +14,9 @@ string typeToString(Types type) {
             return "STRING";
         case VOID_TYPE:
             return "VOID";
+        default:
+            string exceptionMessage("typeToString non-exhaustive");
+            throw (semErr(exceptionMessage));
     }
 }
 

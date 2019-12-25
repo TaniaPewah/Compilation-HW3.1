@@ -320,7 +320,10 @@ Call : ID LPAREN ExpList RPAREN
 ;
 
 ExpList : Exp {  }
-    | Exp COMMA ExpList {  }
+    | Exp COMMA ExpList { 
+                            $$ = $3;
+                            ((ExpListNode*)$$)->add(((ExpNode*)$1)->type);
+                        }
 ;
 
 Type : INT

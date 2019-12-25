@@ -864,17 +864,17 @@ YY_RULE_SETUP
 case 6:
 YY_RULE_SETUP
 #line 29 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return AND; }
+{ yylval =  new BinopNode(yylineno, AND_OP); return AND; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 30 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return OR; }
+{ yylval =  new BinopNode(yylineno, OR_OP); return OR; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 31 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return NOT; }
+{ yylval =  new BinopNode(yylineno, NOT_OP); return NOT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
@@ -954,57 +954,57 @@ YY_RULE_SETUP
 case 24:
 YY_RULE_SETUP
 #line 47 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return EQUAL; }
+{ yylval =  new RelopNode(yylineno); return EQUAL; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 48 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return NOTEQUAL; }
+{ yylval =  new RelopNode(yylineno); return NOTEQUAL; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 49 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return LESS; }
+{ yylval =  new RelopNode(yylineno); return LESS; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 50 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return GREATER; }
+{ yylval =  new RelopNode(yylineno); return GREATER; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 51 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return LESSEQUAL; }
+{ yylval =  new RelopNode(yylineno); return LESSEQUAL; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 52 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return GREATEREQUAL; }
+{ yylval =  new RelopNode(yylineno); return GREATEREQUAL; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 53 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return ADD; }
+{ yylval =  new BinopNode(yylineno, ADD_OP); return ADD; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 54 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return SUB; }
+{ yylval =  new BinopNode(yylineno, SUB_OP); return SUB; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 55 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return MUL; }
+{ yylval =  new BinopNode(yylineno, MUL_OP); return MUL; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 56 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return DIV; }
+{ yylval =  new BinopNode(yylineno, DIV_OP); return DIV; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 57 "scanner.lex"
-{ yylval =  new OpNode(yylineno); return ASSIGN; }
+{ yylval =  new AssignNode(yylineno); return ASSIGN; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP

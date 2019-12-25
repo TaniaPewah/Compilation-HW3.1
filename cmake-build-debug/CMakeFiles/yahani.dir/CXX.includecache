@@ -6,19 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/guy-pc/CLionProjects/HW3.1/hw3_output.hpp
+../hw3_output.hpp
 vector
 -
 string
 -
 
-/home/guy-pc/CLionProjects/HW3.1/parser.cpp
-parser.hpp
-/home/guy-pc/CLionProjects/HW3.1/parser.hpp
+../output.hpp
+vector
+-
+string
+-
 
-/home/guy-pc/CLionProjects/HW3.1/parser.hpp
+../parser.hpp
 hw3_output.hpp
-/home/guy-pc/CLionProjects/HW3.1/hw3_output.hpp
+../hw3_output.hpp
 stdlib.h
 -
 string.h
@@ -29,4 +31,48 @@ memory
 -
 iostream
 -
+
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/lexer.cpp
+stdio.h
+-
+string.h
+-
+errno.h
+-
+stdlib.h
+-
+inttypes.h
+-
+stdio.h
+-
+parser.hpp
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.hpp
+parser.tab.hpp
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.hpp
+output.hpp
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/output.hpp
+unistd.h
+-
+
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp
+parser.hpp
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.hpp
+iostream
+-
+stddef.h
+-
+libintl.h
+-
+alloca.h
+-
+malloc.h
+-
+stdlib.h
+-
+stdlib.h
+-
+stdio.h
+-
+
+/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.hpp
 

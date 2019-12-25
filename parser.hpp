@@ -21,6 +21,16 @@ enum Types {
     STRING_TYPE,
 };
 
+enum Operation {
+    ADD_OP,
+    SUB_OP,
+    MUL_OP,
+    DIV_OP,
+    OR_OP,
+    AND_OP,
+    NOT_OP
+};
+
 class semErr : public std::exception {
 public:
     semErr(const string msg) : m_msg(msg) {}
@@ -74,9 +84,20 @@ public:
     StringNode(char *str, int lineno) : Node(lineno), str(str) {};
 };
 
-class OpNode : public Node {
+class BinopNode : public Node {
 public:
-    OpNode(int lineno) : Node(lineno) {};
+    Operation operation;
+    BinopNode(int lineno, Operation op) : Node(lineno), operation(op) {};
+};
+
+class RelopNode : public Node {
+public:
+    RelopNode(int lineno) : Node(lineno) {};
+};
+
+class AssignNode : public Node {
+public:
+    AssignNode(int lineno) : Node(lineno) {};
 };
 
 class CallNode : public Node {
@@ -87,10 +108,24 @@ public:
 };
 
 class ExpNode : public Node {
+    bool isNumTypes(Types type1, Types type2);
+    Types binopResType(Types a, Types b);
 public:
     Types type;
 
     ExpNode(Types type, int lineno) : Node(lineno), type(type) {};
+    ExpNode(Types type1, Types type2, int lineno, BinopNode* node) : Node(lineno) {
+        try {
+            type = binopResType(type1, type2);
+        } catch (exception &e) {
+            output::errorMismatch(lineno);
+        }
+    };
+
+    ExpNode(Types type1, Types type2, int lineno, RelopNode* node) : Node(lineno) {
+        if (isNumTypes(type1, type2)) output::errorMismatch(lineno);
+        type = BOOL_TYPE;
+    };
 };
 
 class ExpListNode : public Node {
@@ -210,8 +245,6 @@ string typeToString(Types type);
 
 vector<string> typeToStringVector(vector<Types> &types);
 
-void checkOpTypes(ExpNode *exp1, ExpNode *exp2, int lineno);
-
 #define YYSTYPE Node*
 
 /* Symbol Table */
@@ -268,14 +301,14 @@ public:
     void endScope() {
         output::endScope();
 
-        for (int i = 0; i < entries.size(); i++) {
-            if (entries[i].isFunction) {
-                string retType = typeToString(entries[i].type);
-                vector<string> argTypes = typeToStringVector(entries[i].argTypes);
+        for (auto & entry : entries) {
+            if (entry.isFunction) {
+                string retType = typeToString(entry.type);
+                vector<string> argTypes = typeToStringVector(entry.argTypes);
                 string functionType = output::makeFunctionType(retType, argTypes);
-                output::printID(entries[i].name, entries[i].offset, functionType);
+                output::printID(entry.name, entry.offset, functionType);
             } else {
-                output::printID(entries[i].name, entries[i].offset, typeToString(entries[i].type));
+                output::printID(entry.name, entry.offset, typeToString(entry.type));
             }
         }
     }

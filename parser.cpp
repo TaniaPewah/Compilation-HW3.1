@@ -29,14 +29,15 @@ vector<string> typeToStringVector(vector<Types>& types) {
     return returnVector;
 }
 
-void checkOpTypes(Node* expr1, Node* expr2, int lineno) {
-    ExpNode* exp1 = (ExpNode*)expr1;
-    ExpNode* exp2 = (ExpNode*)expr2;
-    if (!(exp1->type == INT_TYPE && exp2->type == INT_TYPE
-        || exp1->type == BYTE_TYPE && exp2->type == BYTE_TYPE
-        || exp1->type == BYTE_TYPE && exp2->type == INT_TYPE
-        || exp1->type == INT_TYPE && exp2->type == BYTE_TYPE)) {
-            output::errorMismatch(lineno); 
-            exit(0);
-        }
+
+Types ExpNode::binopResType(Types a, Types b) {
+    if ((a != INT_TYPE && a != BYTE_TYPE) || (b != INT_TYPE && b != BYTE_TYPE)) {
+        string exceptionMessage("binopResType non-numerical types");
+        throw (semErr(exceptionMessage));
+    }
+    return (a == INT_TYPE || b == INT_TYPE) ? INT_TYPE : BYTE_TYPE;
+}
+
+bool ExpNode::isNumTypes(Types type1, Types type2) {
+    return ((type1 == INT_TYPE || type1 == BYTE_TYPE) && (type2 == INT_TYPE || type2 == BYTE_TYPE));
 }

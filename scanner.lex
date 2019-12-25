@@ -26,9 +26,9 @@ int                     { yylval =  new TypeNode(INT_TYPE, yylineno); return INT
 byte                    { yylval =  new TypeNode(BYTE_TYPE, yylineno); return BYTE; }
 b                       { yylval =  new Node(yylineno); return B; }
 bool                    { yylval =  new TypeNode(BOOL_TYPE, yylineno); return BOOL; }
-and                     { yylval =  new OpNode(yylineno); return AND; }
-or                      { yylval =  new OpNode(yylineno); return OR; }
-not                     { yylval =  new OpNode(yylineno); return NOT; }
+and                     { yylval =  new BinopNode(yylineno, AND_OP); return AND; }
+or                      { yylval =  new BinopNode(yylineno, OR_OP); return OR; }
+not                     { yylval =  new BinopNode(yylineno, NOT_OP); return NOT; }
 true                    { yylval =  new Node(yylineno); return TRUE; }
 false                   { yylval =  new Node(yylineno); return FALSE; }
 return                  { yylval =  new Node(yylineno); return RETURN; }
@@ -44,17 +44,17 @@ enum                    { yylval =  new Node(yylineno); return  ENUM; }
 \)                      { yylval =  new Node(yylineno); return RPAREN; }
 \{                      { yylval =  new Node(yylineno); return LBRACE; }
 \}                      { yylval =  new Node(yylineno); return RBRACE; }
-\=\=                    { yylval =  new OpNode(yylineno); return EQUAL; }
-\!\=                    { yylval =  new OpNode(yylineno); return NOTEQUAL; }
-\<                      { yylval =  new OpNode(yylineno); return LESS; }
-\>                      { yylval =  new OpNode(yylineno); return GREATER; }
-\<\=                    { yylval =  new OpNode(yylineno); return LESSEQUAL; }
-\>\=                    { yylval =  new OpNode(yylineno); return GREATEREQUAL; }
-\+                      { yylval =  new OpNode(yylineno); return ADD; }
-\-                      { yylval =  new OpNode(yylineno); return SUB; }
-\*                      { yylval =  new OpNode(yylineno); return MUL; }
-\/                      { yylval =  new OpNode(yylineno); return DIV; }
-\=                      { yylval =  new OpNode(yylineno); return ASSIGN; }
+\=\=                    { yylval =  new RelopNode(yylineno); return EQUAL; }
+\!\=                    { yylval =  new RelopNode(yylineno); return NOTEQUAL; }
+\<                      { yylval =  new RelopNode(yylineno); return LESS; }
+\>                      { yylval =  new RelopNode(yylineno); return GREATER; }
+\<\=                    { yylval =  new RelopNode(yylineno); return LESSEQUAL; }
+\>\=                    { yylval =  new RelopNode(yylineno); return GREATEREQUAL; }
+\+                      { yylval =  new BinopNode(yylineno, ADD_OP); return ADD; }
+\-                      { yylval =  new BinopNode(yylineno, SUB_OP); return SUB; }
+\*                      { yylval =  new BinopNode(yylineno, MUL_OP); return MUL; }
+\/                      { yylval =  new BinopNode(yylineno, DIV_OP); return DIV; }
+\=                      { yylval =  new AssignNode(yylineno); return ASSIGN; }
 {id}                    { yylval =  new IdNode(yytext, yylineno); return ID; }
 {num}                   { yylval =  new NumNode(yytext, yylineno); return NUM; }
 {string}                { yylval =  new StringNode(yytext, yylineno); return STRING; }

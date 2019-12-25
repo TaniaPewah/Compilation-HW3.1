@@ -426,7 +426,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  6
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   363
+#define YYLAST   380
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  42
@@ -435,7 +435,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  69
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  134
+#define YYNSTATES  135
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   296
@@ -483,15 +483,15 @@ static const yytype_uint8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_uint16 yyrline[] =
 {
-       0,    46,    46,    54,    55,    58,    58,    69,    72,    78,
-      83,    84,    89,    89,    99,   100,   103,   106,   112,   116,
-     122,   133,   134,   137,   138,   139,   140,   141,   142,   143,
-     144,   145,   146,   147,   148,   149,   150,   151,   154,   163,
-     168,   174,   190,   208,   209,   212,   214,   216,   220,   221,
-     222,   223,   224,   225,   226,   227,   228,   229,   230,   231,
-     232,   233,   234,   235,   236,   237,   238,   239,   240,   241
+       0,    46,    46,    54,    55,    58,    58,    70,    73,    79,
+      84,    85,    88,    88,    98,    99,   102,   105,   110,   114,
+     120,   131,   132,   135,   136,   144,   152,   155,   170,   185,
+     200,   203,   211,   220,   230,   240,   250,   258,   268,   277,
+     282,   288,   304,   322,   323,   326,   328,   330,   334,   335,
+     336,   337,   338,   339,   346,   347,   348,   355,   356,   357,
+     358,   359,   360,   361,   362,   363,   364,   365,   366,   367
 };
 #endif
 
@@ -540,20 +540,20 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      -6,   -13,    32,    88,    -6,   -47,   -47,   -47,   -47,   -47,
-     -47,   -47,    88,    15,   -47,   -47,    18,   -47,    24,    23,
-     278,   -47,   -15,   -47,    34,   -47,    40,    44,    23,    54,
-     -47,   278,   -47,   -47,   -47,    61,   -47,    62,    63,    -3,
-      69,   -47,    79,    80,   -47,    21,   -47,    38,   -47,    72,
-      93,    96,   101,   -47,   -47,   -47,     9,   128,   162,   -47,
-     300,   -47,    95,   300,   151,   -47,   -47,    62,   292,   300,
-     -47,   -47,     7,   -47,     8,   170,   220,   -47,   301,   -47,
-     300,   300,   300,   300,   300,   300,   300,   300,   300,   300,
-     300,   300,   240,   300,   223,   -47,   173,   186,   118,   -47,
-     300,   -47,   300,   300,   -47,   313,   323,   105,   127,   150,
-     172,   227,    78,    25,   -12,   176,   -47,    62,   260,   -47,
-     -47,   300,   -47,   141,   164,   301,   200,    62,   -47,   -47,
-     -47,    62,   -47,   -47
+      -1,   -15,    22,   212,    -1,   -47,   -47,   -47,   -47,   -47,
+     -47,   -47,   212,     8,   -47,   -47,     2,   -47,    17,    15,
+      42,   -47,   -17,   -47,    29,   -47,    36,    50,    15,    35,
+     -47,    42,   -47,   -47,   -47,    54,   -47,   240,    53,    34,
+      58,   -47,    61,    65,   -47,    -5,   -47,   198,   -47,    62,
+      79,    76,    99,   -47,   -47,   -47,     9,   123,   140,   -47,
+     317,   -47,    70,   317,   146,   -47,   -47,   240,   309,   317,
+     -47,   -47,   -13,   -47,    -7,   148,   237,   -47,   318,   -47,
+     317,   317,   317,   317,   317,   317,   317,   317,   317,   317,
+     317,   317,   257,   317,   219,   -47,   167,   161,    93,   -47,
+     317,   -47,   317,   317,   -47,   330,   340,    80,   102,   125,
+     147,   244,    55,   -12,     1,   151,   -47,   -47,   277,   -47,
+     -47,   317,   -47,   116,   139,   318,   240,   240,   -47,   -47,
+     -47,   191,   -47,   240,   -47
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -572,17 +572,17 @@ static const yytype_uint8 yydefact[] =
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,    42,     0,    43,     0,    25,
        0,    24,     0,     0,    48,    61,    62,    63,    64,    65,
-      66,    67,    68,    49,    50,    52,    51,     0,     0,    23,
-      41,     0,    29,     0,     0,    69,    33,     0,    44,    28,
-      27,     0,    35,    34
+      66,    67,    68,    49,    50,    52,    51,    40,     0,    23,
+      41,     0,    29,     0,     0,    69,     0,     0,    44,    28,
+      27,    33,    35,     0,    34
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -47,   -47,   225,     5,   -47,   -47,   204,   221,   -47,   -47,
-     -47,   -47,   205,   -47,   175,   -46,   -47,   -47,   -47,   -37,
-     119,     0,    19
+     -47,   -47,   203,     4,   -47,   -47,   180,   199,   -47,   -47,
+     -47,   -47,   187,   -47,   158,   -46,   -47,   -47,   111,   -37,
+     108,     0,   -18
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -598,84 +598,88 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      50,    71,     1,    14,    28,     4,    53,    54,    29,     4,
-      50,     5,    14,     8,     9,    55,    10,    56,    53,    54,
-      27,    57,    58,    59,    60,    99,   101,    90,    91,    56,
-      50,    27,     6,    57,    58,    59,    60,   100,   102,    18,
-      19,    68,     8,     9,    20,    10,    38,    21,    71,    39,
-      40,    69,    41,    42,    43,    30,    75,    50,    62,    31,
-      44,    70,    45,    89,    90,    91,     8,     9,    32,    10,
-      38,   126,    34,    39,    40,    76,    41,    42,    43,    78,
-      50,   132,    92,    37,    44,   133,    45,    52,    98,    63,
-      50,     7,     8,     9,    50,    10,    72,    65,    66,   105,
-     106,   107,   108,   109,   110,   111,   112,   113,   114,   115,
-     116,    73,   118,    79,   -39,    88,    89,    90,    91,   123,
-      74,   124,   125,    80,    81,   -38,    82,    83,    84,    85,
-      86,    87,    88,    89,    90,    91,   122,    83,    84,    85,
-      86,    87,    88,    89,    90,    91,    80,    81,    68,    82,
-      83,    84,    85,    86,    87,    88,    89,    90,    91,   129,
-      84,    85,    86,    87,    88,    89,    90,    91,    77,    80,
-      81,    93,    82,    83,    84,    85,    86,    87,    88,    89,
-      90,    91,   130,   -39,    85,    86,    87,    88,    89,    90,
-      91,   103,    80,    81,   120,    82,    83,    84,    85,    86,
-      87,    88,    89,    90,    91,   121,   -39,    86,    87,    88,
-      89,    90,    91,   131,    80,    81,    91,    82,    83,    84,
-      85,    86,    87,    88,    89,    90,    91,     8,     9,    15,
-      10,    38,    33,    17,    39,    40,    36,    41,    42,    43,
-     128,   104,    94,     0,     0,    44,   119,    45,    80,    81,
+      50,    71,    28,    14,     4,    99,    29,     1,     4,     5,
+      50,   101,    14,     8,     9,    68,    10,   100,    53,    54,
+      27,    62,     6,   102,    19,    69,    89,    90,    91,    56,
+      50,    27,    18,    57,    58,    59,    60,    20,    76,    21,
+      90,    91,    78,    53,    54,    92,     8,     9,    71,    10,
+      30,    98,    55,    34,    56,    31,    75,    50,    57,    58,
+      59,    60,   105,   106,   107,   108,   109,   110,   111,   112,
+     113,   114,   115,   116,    32,   118,    37,    52,    63,    65,
+     131,   132,   123,    66,   124,   125,    72,   134,    79,    50,
+      50,   -39,    88,    89,    90,    91,    50,    73,    80,    81,
+      74,    82,    83,    84,    85,    86,    87,    88,    89,    90,
+      91,   122,    83,    84,    85,    86,    87,    88,    89,    90,
+      91,    80,    81,   -38,    82,    83,    84,    85,    86,    87,
+      88,    89,    90,    91,   129,    84,    85,    86,    87,    88,
+      89,    90,    91,    68,    80,    81,    77,    82,    83,    84,
+      85,    86,    87,    88,    89,    90,    91,   130,   -39,    85,
+      86,    87,    88,    89,    90,    91,    93,    80,    81,   103,
+      82,    83,    84,    85,    86,    87,    88,    89,    90,    91,
+     121,   -39,    86,    87,    88,    89,    90,    91,   120,    80,
+      81,    91,    82,    83,    84,    85,    86,    87,    88,    89,
+      90,    91,     8,     9,   133,    10,    38,    15,    33,    39,
+      40,    17,    41,    42,    43,     7,     8,     9,    36,    10,
+      44,    70,    45,     8,     9,    94,    10,    38,   126,   128,
+      39,    40,     0,    41,    42,    43,     0,     0,     0,     0,
+       0,    44,   119,    45,     8,     9,     0,    10,    38,     0,
+       0,    39,    40,     0,    41,    42,    43,     0,   104,     0,
+       0,     0,    44,     0,    45,    80,    81,     0,    82,    83,
+      84,    85,    86,    87,    88,    89,    90,    91,   117,   -39,
+      87,    88,    89,    90,    91,    80,    81,     0,    82,    83,
+      84,    85,    86,    87,    88,    89,    90,    91,   127,     0,
+       0,     0,     0,     0,     0,    80,    81,     0,    82,    83,
+      84,    85,    86,    87,    88,    89,    90,    91,    53,    54,
+       0,     0,     0,     0,     0,     0,    53,    54,     0,    56,
+      95,     0,     0,    57,    58,    59,    60,    56,     0,     0,
+       0,    57,    58,    59,    60,     0,    80,    81,     0,    82,
+      83,    84,    85,    86,    87,    88,    89,    90,    91,    81,
        0,    82,    83,    84,    85,    86,    87,    88,    89,    90,
-      91,   117,   -39,    87,    88,    89,    90,    91,    80,    81,
-       0,    82,    83,    84,    85,    86,    87,    88,    89,    90,
-      91,   127,     8,     9,     0,    10,     0,     0,    80,    81,
-       0,    82,    83,    84,    85,    86,    87,    88,    89,    90,
-      91,    53,    54,     0,     0,     0,     0,     0,     0,    53,
-      54,     0,    56,    95,     0,     0,    57,    58,    59,    60,
-      56,     0,     0,     0,    57,    58,    59,    60,     0,    80,
-      81,     0,    82,    83,    84,    85,    86,    87,    88,    89,
-      90,    91,    81,     0,    82,    83,    84,    85,    86,    87,
-      88,    89,    90,    91,    82,    83,    84,    85,    86,    87,
-      88,    89,    90,    91
+      91,    82,    83,    84,    85,    86,    87,    88,    89,    90,
+      91
 };
 
 static const yytype_int16 yycheck[] =
 {
-      37,    47,     8,     3,    19,     0,     9,    10,    23,     4,
-      47,    24,    12,     4,     5,    18,     7,    20,     9,    10,
-      20,    24,    25,    26,    27,    18,    18,    39,    40,    20,
-      67,    31,     0,    24,    25,    26,    27,    30,    30,    24,
-      22,    20,     4,     5,    20,     7,     8,    24,    94,    11,
-      12,    30,    14,    15,    16,    21,    56,    94,    39,    19,
-      22,    23,    24,    38,    39,    40,     4,     5,    24,     7,
-       8,   117,    18,    11,    12,    56,    14,    15,    16,    60,
-     117,   127,    63,    22,    22,   131,    24,    24,    69,    20,
-     127,     3,     4,     5,   131,     7,    24,    18,    18,    80,
-      81,    82,    83,    84,    85,    86,    87,    88,    89,    90,
-      91,    18,    93,    18,    36,    37,    38,    39,    40,   100,
-      24,   102,   103,    28,    29,    24,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    18,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    28,    29,    20,    31,
-      32,    33,    34,    35,    36,    37,    38,    39,    40,    18,
-      33,    34,    35,    36,    37,    38,    39,    40,     6,    28,
-      29,    20,    31,    32,    33,    34,    35,    36,    37,    38,
-      39,    40,    18,    33,    34,    35,    36,    37,    38,    39,
-      40,    21,    28,    29,    21,    31,    32,    33,    34,    35,
-      36,    37,    38,    39,    40,    19,    34,    35,    36,    37,
-      38,    39,    40,    13,    28,    29,    40,    31,    32,    33,
-      34,    35,    36,    37,    38,    39,    40,     4,     5,     4,
-       7,     8,    28,    12,    11,    12,    31,    14,    15,    16,
-     121,    21,    67,    -1,    -1,    22,    23,    24,    28,    29,
+      37,    47,    19,     3,     0,    18,    23,     8,     4,    24,
+      47,    18,    12,     4,     5,    20,     7,    30,     9,    10,
+      20,    39,     0,    30,    22,    30,    38,    39,    40,    20,
+      67,    31,    24,    24,    25,    26,    27,    20,    56,    24,
+      39,    40,    60,     9,    10,    63,     4,     5,    94,     7,
+      21,    69,    18,    18,    20,    19,    56,    94,    24,    25,
+      26,    27,    80,    81,    82,    83,    84,    85,    86,    87,
+      88,    89,    90,    91,    24,    93,    22,    24,    20,    18,
+     126,   127,   100,    18,   102,   103,    24,   133,    18,   126,
+     127,    36,    37,    38,    39,    40,   133,    18,    28,    29,
+      24,    31,    32,    33,    34,    35,    36,    37,    38,    39,
+      40,    18,    32,    33,    34,    35,    36,    37,    38,    39,
+      40,    28,    29,    24,    31,    32,    33,    34,    35,    36,
+      37,    38,    39,    40,    18,    33,    34,    35,    36,    37,
+      38,    39,    40,    20,    28,    29,     6,    31,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    18,    33,    34,
+      35,    36,    37,    38,    39,    40,    20,    28,    29,    21,
+      31,    32,    33,    34,    35,    36,    37,    38,    39,    40,
+      19,    34,    35,    36,    37,    38,    39,    40,    21,    28,
+      29,    40,    31,    32,    33,    34,    35,    36,    37,    38,
+      39,    40,     4,     5,    13,     7,     8,     4,    28,    11,
+      12,    12,    14,    15,    16,     3,     4,     5,    31,     7,
+      22,    23,    24,     4,     5,    67,     7,     8,   117,   121,
+      11,    12,    -1,    14,    15,    16,    -1,    -1,    -1,    -1,
+      -1,    22,    23,    24,     4,     5,    -1,     7,     8,    -1,
+      -1,    11,    12,    -1,    14,    15,    16,    -1,    21,    -1,
+      -1,    -1,    22,    -1,    24,    28,    29,    -1,    31,    32,
+      33,    34,    35,    36,    37,    38,    39,    40,    21,    35,
+      36,    37,    38,    39,    40,    28,    29,    -1,    31,    32,
+      33,    34,    35,    36,    37,    38,    39,    40,    21,    -1,
+      -1,    -1,    -1,    -1,    -1,    28,    29,    -1,    31,    32,
+      33,    34,    35,    36,    37,    38,    39,    40,     9,    10,
+      -1,    -1,    -1,    -1,    -1,    -1,     9,    10,    -1,    20,
+      21,    -1,    -1,    24,    25,    26,    27,    20,    -1,    -1,
+      -1,    24,    25,    26,    27,    -1,    28,    29,    -1,    31,
+      32,    33,    34,    35,    36,    37,    38,    39,    40,    29,
       -1,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    21,    35,    36,    37,    38,    39,    40,    28,    29,
-      -1,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    21,     4,     5,    -1,     7,    -1,    -1,    28,    29,
-      -1,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,     9,    10,    -1,    -1,    -1,    -1,    -1,    -1,     9,
-      10,    -1,    20,    21,    -1,    -1,    24,    25,    26,    27,
-      20,    -1,    -1,    -1,    24,    25,    26,    27,    -1,    28,
-      29,    -1,    31,    32,    33,    34,    35,    36,    37,    38,
-      39,    40,    29,    -1,    31,    32,    33,    34,    35,    36,
-      37,    38,    39,    40,    31,    32,    33,    34,    35,    36,
-      37,    38,    39,    40
+      40,    31,    32,    33,    34,    35,    36,    37,    38,    39,
+      40
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -694,8 +698,8 @@ static const yytype_uint8 yystos[] =
       39,    40,    64,    20,    56,    21,    62,    64,    64,    18,
       30,    18,    30,    21,    21,    64,    64,    64,    64,    64,
       64,    64,    64,    64,    64,    64,    64,    21,    64,    23,
-      21,    19,    18,    64,    64,    64,    57,    21,    62,    18,
-      18,    13,    57,    57
+      21,    19,    18,    64,    64,    64,    60,    21,    62,    18,
+      18,    57,    57,    13,    57
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -716,7 +720,7 @@ static const yytype_uint8 yyr2[] =
        0,     2,     2,     0,     2,     0,     7,     1,     3,     1,
        0,     2,     0,     9,     1,     1,     0,     1,     1,     3,
        2,     1,     2,     4,     3,     3,     1,     5,     5,     4,
-       2,     2,     3,     5,     7,     6,     2,     2,     2,     0,
+       2,     2,     3,     6,     8,     6,     2,     2,     2,     0,
        0,     4,     3,     1,     3,     1,     1,     1,     3,     3,
        3,     3,     3,     1,     1,     1,     2,     1,     1,     1,
        2,     3,     3,     3,     3,     3,     3,     3,     3,     4
@@ -1506,7 +1510,7 @@ yyreduce:
                               exit(0);
                           }
                       }
-#line 1510 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1514 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 5:
@@ -1517,7 +1521,7 @@ yyreduce:
                            exit(0);
                        }
                    }
-#line 1521 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1525 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 6:
@@ -1525,45 +1529,38 @@ yyreduce:
     {
                             yyval = new EnumDeclNode(((IdNode*)yyvsp[-5])->name, yyvsp[-5]->lineno);
                             exitOnFalse(symbolTable.addEnum((IdNode*)yyvsp[-5], ((EnumeratorListNode*)yyvsp[-3])->enums));
+                            yyval = new StatementNode();
                        }
-#line 1530 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1535 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 7:
-#line 69 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 70 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                             yyval = new EnumeratorListNode(((EnumeratorNode*)yyvsp[0])->name, yyvsp[0]->lineno);
                         }
-#line 1538 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1543 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 8:
-#line 72 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 73 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                                     yyval = yyvsp[0];
                                     ((EnumeratorListNode*)yyval)->add(((EnumeratorNode*)yyvsp[-2])->name, yyvsp[-2]->lineno);
                                 }
-#line 1547 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1552 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 9:
-#line 78 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 79 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                     yyval = new EnumeratorNode(((IdNode*)yyvsp[0])->name, yyvsp[0]->lineno);
                 }
-#line 1555 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
-    break;
-
-  case 11:
-#line 84 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {
-                        yyval = yyvsp[0];
-                     }
-#line 1563 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1560 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 12:
-#line 89 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 88 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                 if (symbolTable.isAlreadyDefined(((IdNode*)yyvsp[-3])->name)) {
                     output::errorDef(yyvsp[-3]->lineno, ((IdNode*)yyvsp[-3])->name);
@@ -1572,62 +1569,62 @@ yyreduce:
                 exitOnFalse(symbolTable.addFunction((IdNode*)yyvsp[-3], ((TypeNode*)yyvsp[-4])->type, ((FormalsNode*)yyvsp[-1])->types, ((FormalsNode*)yyvsp[-1])->names));
                 yyval = new StatementNode();
             }
-#line 1576 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1573 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 13:
-#line 96 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 95 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { symbolTable.endScope(); }
-#line 1582 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1579 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 14:
-#line 99 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 98 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { yyval = yyvsp[0]; }
-#line 1588 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1585 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 15:
-#line 100 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 99 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { yyval = yyvsp[0]; }
-#line 1594 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1591 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 16:
-#line 103 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 102 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
             yyval = new FormalsNode();
         }
-#line 1602 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1599 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 17:
-#line 107 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 105 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
             yyval = new FormalsNode(((FormalsListNode*)yyvsp[0])->types, ((FormalsListNode*)yyvsp[0])->names, yyvsp[0]->lineno);
         }
-#line 1610 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1607 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 18:
-#line 112 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 110 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                 yyval = new FormalsListNode(((FormalDeclNode*)yyvsp[0])->type, ((FormalDeclNode*)yyvsp[0])->name, yyvsp[0]->lineno);
             }
-#line 1618 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1615 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 19:
-#line 116 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 114 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                 yyval = yyvsp[0];
                 ((FormalsListNode*)yyval)->add(((FormalDeclNode*)yyvsp[-2])->type, ((FormalDeclNode*)yyvsp[-2])->name, yyvsp[-2]->lineno);
             }
-#line 1627 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1624 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 20:
-#line 123 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 121 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                 if (symbolTable.isAlreadyDefined(((IdNode*)yyvsp[0])->name)) {
                     output::errorDef(yyvsp[0]->lineno, ((IdNode*)yyvsp[0])->name);
@@ -1636,113 +1633,229 @@ yyreduce:
                 exitOnFalse(symbolTable.addVar((IdNode*)yyvsp[0], ((TypeNode*)yyvsp[-1])->type));
                 yyval = new FormalDeclNode(((TypeNode*)yyvsp[-1])->type, ((IdNode*)yyvsp[0])->name, yyvsp[0]->lineno);
             }
-#line 1640 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1637 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 21:
-#line 133 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 131 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { yyval = yyvsp[0]; }
-#line 1646 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1643 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 22:
-#line 134 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 132 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { yyval = yyvsp[0]; }
-#line 1652 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1649 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 23:
-#line 137 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1658 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 135 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { symbolTable.endScope(); }
+#line 1655 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 24:
-#line 138 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1664 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 136 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                    if (symbolTable.isAlreadyDefined(((IdNode*)yyvsp[-1])->name)) {
+                        output::errorDef(yyvsp[-1]->lineno, ((IdNode*)yyvsp[-1])->name);
+                        exit(0);
+                    }
+
+                    exitOnFalse(symbolTable.addVar((IdNode*)yyvsp[-1], ((TypeNode*)yyvsp[-2])->type));
+                 }
+#line 1668 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 25:
-#line 139 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1670 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 144 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                         if (symbolTable.isAlreadyDefined(((IdNode*)yyvsp[-1])->name)) {
+                             output::errorDef(yyvsp[-1]->lineno, ((IdNode*)yyvsp[-1])->name);
+                             exit(0);
+                         }
+
+                         exitOnFalse(symbolTable.addVar((IdNode*)yyvsp[-1], ((TypeNode*)yyvsp[-2])->type));
+                     }
+#line 1681 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 26:
-#line 140 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1676 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 152 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                     yyval = yyvsp[0];
+               }
+#line 1689 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 27:
-#line 141 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1682 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 155 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                          if (symbolTable.isAlreadyDefined(((IdNode*)yyvsp[-3])->name)) {
+                              output::errorDef(yyvsp[-3]->lineno, ((IdNode*)yyvsp[-3])->name);
+                              exit(0);
+                          }
+
+                          Types type = ((TypeNode*)yyvsp[-4])->type;
+                          Types expType = ((ExpNode*)yyvsp[-1])->type;
+                          if (expType != type && !(type == INT_TYPE && expType == BYTE_TYPE)){
+                              output::errorMismatch(yyvsp[-4]->lineno);
+                              exit(0);
+                          }
+                          exitOnFalse(symbolTable.addVar((IdNode*)yyvsp[-3], ((TypeNode*)yyvsp[-4])->type));
+                          yyval = new StatementNode();
+                          }
+#line 1709 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 28:
-#line 142 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1688 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 170 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                                  if (symbolTable.isAlreadyDefined(((IdNode*)yyvsp[-3])->name)) {
+                                      output::errorDef(yyvsp[-3]->lineno, ((IdNode*)yyvsp[-3])->name);
+                                      exit(0);
+                                  }
+
+                                  Types type = ((TypeNode*)yyvsp[-4])->type;
+                                  Types expType = ((ExpNode*)yyvsp[-1])->type;
+                                  if (expType != type && !(type == INT_TYPE && expType == BYTE_TYPE)){
+                                      output::errorMismatch(yyvsp[-4]->lineno);
+                                      exit(0);
+                                  }
+                                  exitOnFalse(symbolTable.addVar((IdNode*)yyvsp[-3], ((TypeNode*)yyvsp[-4])->type));
+                                  yyval = new StatementNode();
+                                }
+#line 1729 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 29:
-#line 143 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1694 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 185 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                           if (!symbolTable.isDefinedVar(((IdNode*)yyvsp[-3])->name)) {
+                               output::errorUndef(yyvsp[-3]->lineno, ((IdNode*)yyvsp[-3])->name);
+                               exit(0);
+                           }
+
+                           Types idType = symbolTable.getType(((IdNode*)yyvsp[-3])->name);
+                           Types expType = ((ExpNode*)yyvsp[-1])->type;
+                           if (idType != expType && !(idType == INT_TYPE && expType == BYTE_TYPE)){
+                               output::errorMismatch(yyvsp[-3]->lineno);
+                               exit(0);
+                           }
+
+                           yyval =  new StatementNode();
+                       }
+#line 1749 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 30:
-#line 144 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1700 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 200 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                  yyval = new StatementNode();
+              }
+#line 1757 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 31:
-#line 145 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1706 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 203 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                    if (symbolTable.getCurrentFunctionRetType() != VOID_TYPE) {
+                        output::errorMismatch(yyvsp[-1]->lineno);
+                        exit(0);
+                    }
+
+                    yyval = new StatementNode();
+                }
+#line 1770 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 32:
-#line 146 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1712 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 211 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                        Types retType = symbolTable.getCurrentFunctionRetType();
+                        if ((retType != ((ExpNode*)yyvsp[-1])->type && !(retType == INT_TYPE && ((ExpNode*)yyvsp[-1])->type == BYTE_TYPE)) || retType == VOID_TYPE) {
+                            output::errorMismatch(yyvsp[-2]->lineno);
+                            exit(0);
+                        }
+
+                        yyval = new StatementNode();
+                    }
+#line 1784 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 33:
-#line 147 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1718 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 220 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                                                       Types cond = ((ExpNode*)yyvsp[-3])->type;
+                                                       if (cond != BOOL_TYPE) {
+                                                           output::errorMismatch(yyvsp[-5]->lineno);
+                                                           exit(0);
+                                                       }
+                                                       symbolTable.endScope();
+
+                                                       yyval = yyvsp[-2];
+                                                   }
+#line 1799 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 34:
-#line 148 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1724 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 230 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                                                       Types cond = ((ExpNode*)yyvsp[-5])->type;
+                                                       if (cond != BOOL_TYPE) {
+                                                            output::errorMismatch(yyvsp[-7]->lineno);
+                                                            exit(0);
+                                                       }
+                                                       symbolTable.endScope();
+
+                                                       yyval = yyvsp[-4];
+                                                    }
+#line 1814 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 35:
-#line 149 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1730 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 240 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                                                       Types cond = ((ExpNode*)yyvsp[-3])->type;
+                                                       if (cond != BOOL_TYPE) {
+                                                              output::errorMismatch(yyvsp[-5]->lineno);
+                                                              exit(0);
+                                                          }
+                                                          symbolTable.endScope();
+
+                                                          yyval = yyvsp[-2];
+                                                      }
+#line 1829 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 36:
-#line 150 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1736 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 250 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                   if (symbolTable.isInWhile() == false) {
+                       output::errorUnexpectedBreak(yyvsp[-1]->lineno);
+                       exit(0);
+                   }
+
+                   yyval = new StatementNode();
+               }
+#line 1842 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 37:
-#line 151 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1742 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 258 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                      if (symbolTable.isInWhile() == false) {
+                          output::errorUnexpectedContinue(yyvsp[-1]->lineno);
+                          exit(0);
+                      }
+
+                      yyval = new StatementNode();
+                  }
+#line 1855 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 38:
-#line 154 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 268 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                         if (!symbolTable.isEnumDefined(((IdNode*)yyvsp[0])->name)) {
                             output::errorUndefEnum(yyvsp[0]->lineno, ((IdNode*)yyvsp[0])->name);
@@ -1750,27 +1863,27 @@ yyreduce:
                         }
 
                    }
-#line 1754 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1867 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 39:
-#line 163 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 277 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                             symbolTable.newInnerScope(true /*isWhileScope*/);
                         }
-#line 1762 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1875 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 40:
-#line 169 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 283 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                         symbolTable.newInnerScope();
                     }
-#line 1770 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1883 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 41:
-#line 175 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 289 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                             if (!symbolTable.isDefinedFunction(((IdNode*)yyvsp[-3])->name)) {
                                 output::errorUndefFunc(yyvsp[-3]->lineno, ((IdNode*)yyvsp[-3])->name);
@@ -1786,11 +1899,11 @@ yyreduce:
                         
                             yyval = new CallNode(symbolTable.getType(((IdNode*)yyvsp[-3])->name), yyvsp[-3]->lineno);
                         }
-#line 1790 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1903 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 42:
-#line 191 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 305 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {
                             if (!symbolTable.isDefinedFunction(((IdNode*)yyvsp[-2])->name)) {
                                 output::errorUndefFunc(yyvsp[-2]->lineno, ((IdNode*)yyvsp[-2])->name);
@@ -1806,173 +1919,185 @@ yyreduce:
                         
                             yyval = new CallNode(symbolTable.getType(((IdNode*)yyvsp[-2])->name), yyvsp[-2]->lineno);
                         }
-#line 1810 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1923 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 43:
-#line 208 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 322 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {  }
-#line 1816 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1929 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 44:
-#line 209 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 323 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     {  }
-#line 1822 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1935 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 45:
-#line 213 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 327 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { yyval = yyvsp[0]; }
-#line 1828 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1941 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 46:
-#line 215 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 329 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { yyval = yyvsp[0]; }
-#line 1834 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1947 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 47:
-#line 217 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 331 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
     { yyval = yyvsp[0]; }
-#line 1840 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 1953 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 48:
-#line 220 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1846 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 334 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = yyvsp[-1]; }
+#line 1959 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 49:
-#line 221 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1852 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 335 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (BinopNode*)yyvsp[-1]); }
+#line 1965 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 50:
-#line 222 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1858 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 336 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (BinopNode*)yyvsp[-1]); }
+#line 1971 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 51:
-#line 223 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1864 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 337 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (BinopNode*)yyvsp[-1]); }
+#line 1977 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 52:
-#line 224 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1870 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 338 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (BinopNode*)yyvsp[-1]); }
+#line 1983 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 53:
-#line 225 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1876 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 339 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { if (!symbolTable.isDefinedVar(((IdNode*)yyvsp[0])->name)) {
+               output::errorUndef(yyvsp[0]->lineno, ((IdNode*)yyvsp[0])->name);
+               exit(0);
+           }
+
+           yyval = new ExpNode(symbolTable.getType(((IdNode*)yyvsp[0])->name), yyvsp[0]->lineno);
+         }
+#line 1995 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 54:
-#line 226 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1882 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 346 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((CallNode*)yyvsp[0])->type, yyvsp[0]->lineno); }
+#line 2001 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 55:
-#line 227 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1888 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 347 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(INT_TYPE, yyvsp[0]->lineno); }
+#line 2007 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 56:
-#line 228 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1894 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 348 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {
+                if (((NumNode*)yyvsp[-1])->num > 255) {
+                    output::errorByteTooLarge(yyvsp[-1]->lineno, ((NumNode*)yyvsp[-1])->getAsString());
+                    exit(0);
+                }
+                yyval = new ExpNode(BYTE_TYPE, yyvsp[-1]->lineno);
+            }
+#line 2019 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 57:
-#line 229 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {   }
-#line 1900 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 355 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(STRING_TYPE, yyvsp[0]->lineno); }
+#line 2025 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 58:
-#line 230 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {   }
-#line 1906 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 356 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    {  yyval = new ExpNode(BOOL_TYPE, yyvsp[0]->lineno); }
+#line 2031 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 59:
-#line 231 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1912 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 357 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(BOOL_TYPE, yyvsp[0]->lineno); }
+#line 2037 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 60:
-#line 232 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1918 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 358 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[0])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[0]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2043 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 61:
-#line 233 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1924 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 359 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2049 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 62:
-#line 234 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1930 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 360 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2055 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 63:
-#line 235 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1936 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 361 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2061 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 64:
-#line 236 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1942 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 362 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2067 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 65:
-#line 237 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1948 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 363 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2073 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 66:
-#line 238 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1954 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 364 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2079 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 67:
-#line 239 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1960 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 365 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2085 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 68:
-#line 240 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1966 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 366 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-2])->type, ((ExpNode*)yyvsp[0])->type, yyvsp[-1]->lineno, (RelopNode*)yyvsp[-1]); }
+#line 2091 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
   case 69:
-#line 241 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
-    {  }
-#line 1972 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 367 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+    { yyval = new ExpNode(((ExpNode*)yyvsp[-3])->type, ((ExpNode*)yyvsp[-1])->type, yyvsp[-2]->lineno, (RelopNode*)yyvsp[-2]); }
+#line 2097 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
     break;
 
 
-#line 1976 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
+#line 2101 "/home/guy-pc/CLionProjects/HW3.1/cmake-build-debug/parser.tab.cpp"
 
       default: break;
     }
@@ -2210,7 +2335,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 243 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
+#line 369 "/home/guy-pc/CLionProjects/HW3.1/parser.ypp"
 
 
 int main()

@@ -240,16 +240,12 @@ Statement : LBRACE {symbolTable.newInnerScope();}
 
                         $$ = new StatementNode();
                     }
-			| IF BoolCond {symbolTable.newInnerScope();} 
-			Statement %prec NO_ELSE {symbolTable.endScope();
-
-				   $$ = $4;}
-			| IF BoolCond {symbolTable.newInnerScope();} 
-			Statement ELSE Statement {
+			| IfScope %prec NO_ELSE {}
+			| IfScope ELSE {symbolTable.newInnerScope();}
+				Statement {
 
 					   symbolTable.endScope();
-
-					   $$ = $4;
+					   $$ = $3;
 					}
 			| WHILE MarkerWhileOn BoolCond Statement {
 
@@ -275,47 +271,53 @@ Statement : LBRACE {symbolTable.newInnerScope();}
                   }
 ;
 
+IfScope : IF BoolCond Statement{
+		symbolTable.endScope();
+		$$ = $3;
+		}
+
+
 BoolCond :  LPAREN Exp RPAREN
-               {
-                   if (((ExpNode*)$2)->type != BOOL_TYPE) {
-                       output::errorMismatch($2->lineno);
-                       exit(0);
-                   }
-               }
+	   {
+		   if (((ExpNode*)$2)->type != BOOL_TYPE) {
+			   output::errorMismatch($2->lineno);
+			   exit(0);
+		   }
+	   }
 ;
 
 Call : ID LPAREN ExpList RPAREN
-                        {
-                            if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
-                                output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
-                                exit(0);
-                            }
+		{
+			if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
+				output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
+				exit(0);
+			}
 
-                            vector<Types> args = symbolTable.getFunctionArgs(((IdNode*)$1)->name);
-                            if (!((ExpListNode*)$3)->compareType(args)) {
-                                vector<string> argTypes = typeToStringVector(args);
-                                output::errorPrototypeMismatch($1->lineno, ((IdNode*)$1)->name, argTypes);
-                                exit(0);
-                            } 
-                        
-                            $$ = new CallNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
-                        }
-                    | ID LPAREN RPAREN
-                        {
-                            if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
-                                output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
-                                exit(0);
-                            }
+			vector<Types> args = symbolTable.getFunctionArgs(((IdNode*)$1)->name);
+			if (!((ExpListNode*)$3)->compareType(args)) {
+				vector<string> argTypes = typeToStringVector(args);
+				output::errorPrototypeMismatch($1->lineno, ((IdNode*)$1)->name, argTypes);
+				exit(0);
+			} 
+		
+			$$ = new CallNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
+		}
+	| ID LPAREN RPAREN
+		{
+			if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
+				output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
+				exit(0);
+			}
 
-                            vector<Types> args = symbolTable.getFunctionArgs(((IdNode*)$1)->name);
-                            if (args.size() != 0) {
-                                vector<string> argTypes = typeToStringVector(args);
-                                output::errorPrototypeMismatch($1->lineno, ((IdNode*)$1)->name, argTypes);
-                                exit(0);
-                            } 
-                        
-                            $$ = new CallNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
-                        }
+			vector<Types> args = symbolTable.getFunctionArgs(((IdNode*)$1)->name);
+			if (args.size() != 0) {
+				vector<string> argTypes = typeToStringVector(args);
+				output::errorPrototypeMismatch($1->lineno, ((IdNode*)$1)->name, argTypes);
+				exit(0);
+			} 
+		
+			$$ = new CallNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
+		}
 ;
 
 

@@ -1,3 +1,4 @@
+// 3.1
 %{
     #include "parser.hpp"
 
@@ -14,32 +15,47 @@
 
 %locations
 
-%token VOID INT BYTE B BOOL ENUM
-%token TRUE FALSE
-%token RETURN IF ELSE WHILE BREAK CONTINUE
+%token VOID
+%token INT
+%token BYTE
+%token B
+%token BOOL
+%token ENUM
+%token TRUE
+%token FALSE
+%token ID
+%token NUM
+%token STRING
+%token RETURN
+%token WHILE
+%token BREAK
+%token CONTINUE
 %token PRECOND
-%token SC COMMA
-%token LPAREN RPAREN LBRACE RBRACE
-%token ID NUM STRING
+%token SC
+%token COMMA
+%token IF
+%token LBRACE 
+%token RBRACE
 
-%right NOT
-%left AND
+%left ASSIGN
 %left OR
-%right ASSIGN
-
-// relop
+%left AND
 %left EQUAL
 %left NOTEQUAL
 %nonassoc LESS
 %nonassoc GREATER
 %nonassoc LESSEQUAL
 %nonassoc GREATEREQUAL
-
-// binop
 %left ADD
 %left SUB
-%left DIV
 %left MUL
+%left DIV
+%right LPAREN RPAREN
+%right NOT
+
+
+%nonassoc NO_ELSE
+%nonassoc ELSE
 
 %%
 
@@ -49,6 +65,24 @@ Program : Enums Funcs {
                               exit(0);
                           }
                       }
+;
+
+Funcs : %empty
+    | FuncDecl Funcs
+;
+
+FuncDecl : RetType ID {
+		if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
+			output::errorDef($2->lineno, ((IdNode*)$2)->name);
+			exit(0);
+			}
+		} 
+		LPAREN Formals RPAREN {
+		
+			exitOnFalse(symbolTable.addFunction((IdNode*)$2, ((TypeNode*)$1)->type, ((FormalsNode*)$4)->types, ((FormalsNode*)$4)->names));
+			$$ = new StatementNode();
+		} 
+		LBRACE Statements RBRACE { symbolTable.endScope(); }
 ;
 
 Enums : %empty
@@ -65,34 +99,6 @@ EnumDecl : ENUM ID {
                             exitOnFalse(symbolTable.addEnum((IdNode*)$2, ((EnumeratorListNode*)$4)->enums));
                             $$ = new StatementNode();
                        }
-;
-
-EnumeratorList : Enumerator {
-                            $$ = new EnumeratorListNode(((EnumeratorNode*)$1)->name, $1->lineno);
-                        }
-    | EnumeratorList COMMA Enumerator {
-                                    $$ = $3;
-                                    ((EnumeratorListNode*)$$)->add(((EnumeratorNode*)$1)->name, $1->lineno);
-                                }
-;
-
-Enumerator : ID {
-                    $$ = new EnumeratorNode(((IdNode*)$1)->name, $1->lineno);
-                }
-;
-
-Funcs : %empty
-    | FuncDecl Funcs
-;
-
-FuncDecl : RetType ID LPAREN Formals RPAREN {
-                if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
-                    output::errorDef($2->lineno, ((IdNode*)$2)->name);
-                    exit(0);
-                }
-                exitOnFalse(symbolTable.addFunction((IdNode*)$2, ((TypeNode*)$1)->type, ((FormalsNode*)$4)->types, ((FormalsNode*)$4)->names));
-                $$ = new StatementNode();
-            } LBRACE Statements RBRACE { symbolTable.endScope(); }
 ;
 
 RetType : Type { $$ = $1; }
@@ -128,12 +134,29 @@ FormalDecl : Type ID
             }
 ;
 
+
+EnumeratorList : Enumerator {
+                            $$ = new EnumeratorListNode(((EnumeratorNode*)$1)->name, $1->lineno);
+                        }
+    | EnumeratorList COMMA Enumerator {
+                                    $$ = $3;
+                                    ((EnumeratorListNode*)$$)->add(((EnumeratorNode*)$1)->name, $1->lineno);
+                                }
+;
+
+Enumerator : ID {
+                    $$ = new EnumeratorNode(((IdNode*)$1)->name, $1->lineno);
+                }
+;
+
+
 Statements : Statement { $$ = $1; }
         | Statements Statement { $$ = $2; }
 ;
 
-Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
-    | Type ID SC {
+Statement : LBRACE {symbolTable.newInnerScope();}
+			Statements RBRACE { symbolTable.endScope(); }
+			| Type ID SC {
                     if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                         output::errorDef($2->lineno, ((IdNode*)$2)->name);
                         exit(0);
@@ -141,7 +164,7 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
 
                     exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                  }
-    | EnumType ID SC {
+			| EnumType ID SC {
                          if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                              output::errorDef($2->lineno, ((IdNode*)$2)->name);
                              exit(0);
@@ -149,10 +172,10 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
 
                          exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                      }
-    | EnumDecl {
+			| EnumDecl {
                      $$ = $1;
                }
-    | Type ID ASSIGN Exp SC {
+			| Type ID ASSIGN Exp SC {
                           if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                               output::errorDef($2->lineno, ((IdNode*)$2)->name);
                               exit(0);
@@ -167,7 +190,7 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
                           exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                           $$ = new StatementNode();
                           }
-    | EnumType ID ASSIGN Exp SC {
+			| EnumType ID ASSIGN Exp SC {
                                   if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                                       output::errorDef($2->lineno, ((IdNode*)$2)->name);
                                       exit(0);
@@ -182,7 +205,7 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
                                   exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                                   $$ = new StatementNode();
                                 }
-    | ID ASSIGN Exp SC {
+			| ID ASSIGN Exp SC {
                            if (!symbolTable.isDefinedVar(((IdNode*)$1)->name)) {
                                output::errorUndef($1->lineno, ((IdNode*)$1)->name);
                                exit(0);
@@ -197,10 +220,10 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
 
                            $$ =  new StatementNode();
                        }
-    | Call SC {
+			| Call SC {
                   $$ = new StatementNode();
               }
-    | RETURN SC {
+			| RETURN SC {
                     if (symbolTable.getCurrentFunctionRetType() != VOID_TYPE) {
                         output::errorMismatch($1->lineno);
                         exit(0);
@@ -208,7 +231,7 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
 
                     $$ = new StatementNode();
                 }
-    | RETURN Exp SC {
+			| RETURN Exp SC {
                         Types retType = symbolTable.getCurrentFunctionRetType();
                         if ((retType != ((ExpNode*)$2)->type && !(retType == INT_TYPE && ((ExpNode*)$2)->type == BYTE_TYPE)) || retType == VOID_TYPE) {
                             output::errorMismatch($1->lineno);
@@ -217,37 +240,24 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
 
                         $$ = new StatementNode();
                     }
-    | IF LPAREN Exp RPAREN NewScope Statement %prec NO_ELSE {
-                                                       Types cond = ((ExpNode*)$3)->type;
-                                                       if (cond != BOOL_TYPE) {
-                                                           output::errorMismatch($1->lineno);
-                                                           exit(0);
-                                                       }
-                                                       symbolTable.endScope();
+			| IF BoolCond {symbolTable.newInnerScope();} 
+			Statement %prec NO_ELSE {symbolTable.endScope();
 
-                                                       $$ = $4;
-                                                   }
-    | IF LPAREN Exp RPAREN NewScope Statement ELSE Statement {
-                                                       Types cond = ((ExpNode*)$3)->type;
-                                                       if (cond != BOOL_TYPE) {
-                                                            output::errorMismatch($1->lineno);
-                                                            exit(0);
-                                                       }
-                                                       symbolTable.endScope();
+				   $$ = $4;}
+			| IF BoolCond {symbolTable.newInnerScope();} 
+			Statement ELSE Statement {
 
-                                                       $$ = $4;
-                                                    }
-    | WHILE MarkerWhileOn LPAREN Exp RPAREN Statement {
-                                                       Types cond = ((ExpNode*)$3)->type;
-                                                       if (cond != BOOL_TYPE) {
-                                                              output::errorMismatch($1->lineno);
-                                                              exit(0);
-                                                          }
+					   symbolTable.endScope();
+
+					   $$ = $4;
+					}
+			| WHILE MarkerWhileOn BoolCond Statement {
+
                                                           symbolTable.endScope();
 
                                                           $$ = $4;
                                                       }
-    | BREAK SC {
+			| BREAK SC {
                    if (symbolTable.isInWhile() == false) {
                        output::errorUnexpectedBreak($1->lineno);
                        exit(0);
@@ -255,7 +265,7 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
 
                    $$ = new StatementNode();
                }
-    | CONTINUE SC {
+			| CONTINUE SC {
                       if (symbolTable.isInWhile() == false) {
                           output::errorUnexpectedContinue($1->lineno);
                           exit(0);
@@ -265,24 +275,13 @@ Statement : LBRACE NewScope Statements RBRACE { symbolTable.endScope(); }
                   }
 ;
 
-EnumType : ENUM ID {
-                        if (!symbolTable.isEnumDefined(((IdNode*)$2)->name)) {
-                            output::errorUndefEnum($2->lineno, ((IdNode*)$2)->name);
-                            exit(0);
-                        }
-
+BoolCond :  LPAREN Exp RPAREN
+               {
+                   if (((ExpNode*)$2)->type != BOOL_TYPE) {
+                       output::errorMismatch($2->lineno);
+                       exit(0);
                    }
-;
-
-MarkerWhileOn : %empty {
-                            symbolTable.newInnerScope(true /*isWhileScope*/);
-                        }
-;
-
-NewScope : %empty
-                    {
-                        symbolTable.newInnerScope();
-                    }
+               }
 ;
 
 Call : ID LPAREN ExpList RPAREN
@@ -319,6 +318,10 @@ Call : ID LPAREN ExpList RPAREN
                         }
 ;
 
+
+MarkerWhileOn : %empty { symbolTable.newInnerScope(true /*isWhileScope*/); }
+;
+
 ExpList : Exp {  }
     | Exp COMMA ExpList { 
                             $$ = $3;
@@ -332,6 +335,15 @@ Type : INT
         { $$ = $1; }
     | BOOL
         { $$ = $1; }
+;
+
+EnumType : ENUM ID {
+		if (!symbolTable.isEnumDefined(((IdNode*)$2)->name)) {
+			output::errorUndefEnum($2->lineno, ((IdNode*)$2)->name);
+			exit(0);
+		}
+
+   }
 ;
 
 Exp : LPAREN Exp RPAREN { $$ = $2; }

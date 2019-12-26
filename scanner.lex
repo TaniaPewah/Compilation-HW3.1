@@ -6,7 +6,7 @@
 #include "parser.tab.hpp"
 #include "output.hpp"
 
-int yyerror(char const*);
+int errorLexical(char const*);
 
 %}
 

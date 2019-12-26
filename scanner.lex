@@ -4,9 +4,9 @@
 
 #include "parser.hpp"
 #include "parser.tab.hpp"
-#include "output.hpp"
+#include "hw3_output.hpp"
 
-int errorLexical(char const*);
+int errorLexical();
 
 %}
 
@@ -67,6 +67,6 @@ enum                    { yylval =  new Node(yylineno); return  ENUM; }
 
 int errorLexical()
 {
-    errorLex(yylineno);
+    output::errorLex(yylineno);
     exit(0);
 }

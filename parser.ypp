@@ -9,6 +9,7 @@
 	extern int yylineno;
 	int yyerror(char const*);
 	void printRule(char const*);
+	void printStringRule(string);
     SymbolTable symbolTable;
     void checkOpTypes(Node*, Node*, int);
     void exitOnFalse(bool);
@@ -73,19 +74,20 @@ Funcs : %empty
     | FuncDecl Funcs { printRule("Funcs ");}
 ;
 
-FuncDecl : RetType ID { printRule("FuncDecl ");
-		if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
-			output::errorDef($2->lineno, ((IdNode*)$2)->name);
-			exit(0);
-			}
-		} 
-		LPAREN Formals RPAREN {
+FuncDecl : RetType ID {
+            printRule("FuncDecl ");
 
-			   exitOnFalse(symbolTable.addFunction(((IdNode*)$2), ((TypeNode*)$1)->type,
-			   ((FormalsNode*)$5)->types, ((FormalsNode*)$5)->names));
+            if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
+                output::errorDef($2->lineno, ((IdNode*)$2)->name);
+                exit(0);
+			}
+		}  LPAREN Formals RPAREN {
+		    printRule("FuncDecl2 oi");
+		    printStringRule(((IdNode*)$2)->name);
+            symbolTable.addFunction(((IdNode*)$2), ((TypeNode*)$1)->type, ((FormalsNode*)$5)->types, ((FormalsNode*)$5)->names);
+            printRule("FuncDecl2 - 2");
 			$$ = new StatementNode();
-		} 
-		LBRACE Statements RBRACE { symbolTable.endScope(); }
+		}  LBRACE Statements RBRACE { symbolTable.endScope(); }
 ;
 
 Enums : %empty
@@ -110,18 +112,19 @@ RetType : Type { printRule("RetType type ");
                 $$ = $1; }
 ;
 
-Formals : %empty { printRule("Formals ");
-        $$ = new FormalsNode(); }
-    | FormalsList { printRule("Formals ");
-         $$ = new FormalsNode(((FormalsListNode*)$1)->types, ((FormalsListNode*)$1)->names, $1->lineno);
-        }
+Formals : %empty { printRule("Formals1 ");
+         $$ = new FormalsNode(); }
+    | FormalsList { printRule("Formals2 ");
+         $$ = new FormalsNode((FormalsListNode*)$1);
+      }
 ;
 
-FormalsList : FormalDecl { printRule("FormalsList ");
+FormalsList : FormalDecl { printRule("FormalsList1 ");
+                            printStringRule(((FormalDeclNode*)$1)->name);
+                            printStringRule(typeToString(((FormalDeclNode*)$1)->type));
                 $$ = new FormalsListNode(((FormalDeclNode*)$1)->type, ((FormalDeclNode*)$1)->name, $1->lineno);
             }
-
-        | FormalDecl COMMA FormalsList { printRule("FormalsList ");
+        | FormalDecl COMMA FormalsList { printRule("FormalsList2 ");
                 $$ = $3;
                 ((FormalsListNode*)$$)->add(((FormalDeclNode*)$1)->type, ((FormalDeclNode*)$1)->name, $1->lineno);
             }
@@ -336,11 +339,11 @@ ExpList : Exp { printRule("ExpList");
                         }
 ;
 
-Type : INT {printRule("Type");
+Type : INT {printRule("Int");
         $$ = $1; }
-    | BYTE {printRule("Type");
+    | BYTE {printRule("Byte");
         $$ = $1; }
-    | BOOL {printRule("Type");
+    | BOOL {printRule("Bool");
         $$ = $1; }
 ;
 
@@ -368,7 +371,6 @@ Exp : LPAREN Exp RPAREN {printRule("Exp");
                output::errorUndef($1->lineno, ((IdNode*)$1)->name);
                exit(0);
            }
-
            $$ = new ExpNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
          }
     | Call {printRule("Exp");
@@ -425,12 +427,16 @@ int yyerror(char const* message)
 }
 
 void exitOnFalse(bool b) {
-
+    cout << "exitOnFalse - bool = " << b << endl;
     if (!b) {
         exit(0);
     }
 }
 
 void printRule(char const* rule){
-    cout << rule << endl;
+    cout << "rule " << rule << endl;
+}
+
+void printStringRule(string rule ){
+    cout << "string " << rule << endl;
 }

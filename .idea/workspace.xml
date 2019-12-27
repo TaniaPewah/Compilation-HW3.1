@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="HW3compi" targetName="yahani" />
+      <config projectName="HW3compi" targetName="GS" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -11,17 +11,29 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4713ac3-995d-4f2e-8d67-0e00e962b6d5" name="Default Changelist" comment="">
+    <list default="true" id="e4713ac3-995d-4f2e-8d67-0e00e962b6d5" name="Default Changelist" comment="together">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/lexer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/lexer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/parser.tab.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/yahani.dir/parser.tab.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/HW3compi.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/HW3compi.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/lexer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lexer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/parser.tab.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/parser.tab.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/parser.tab.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/parser.tab.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/offsetStack.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/offsetStack.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/parser.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/parser.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parser.ypp" beforeDir="false" afterPath="$PROJECT_DIR$/parser.ypp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scanner.lex" beforeDir="false" afterPath="$PROJECT_DIR$/scanner.lex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +46,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -51,7 +64,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HW3compi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -60,9 +73,10 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.VCS" />
   </component>
   <component name="RunManager">
-    <configuration name="yahani" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="HW3compi" TARGET_NAME="yahani" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="HW3compi" RUN_TARGET_NAME="yahani">
+    <configuration name="GS" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="HW3compi" TARGET_NAME="GS" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="HW3compi" RUN_TARGET_NAME="GS">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -91,6 +105,10 @@
       <option name="presentableId" value="Default" />
       <updated>1577278591917</updated>
       <workItem from="1577278593334" duration="25854000" />
+      <workItem from="1577309441185" duration="620000" />
+      <workItem from="1577444418145" duration="696000" />
+      <workItem from="1577453896008" duration="1336000" />
+      <workItem from="1577457708137" duration="18424000" />
     </task>
     <task id="LOCAL-00001" summary="mileStone 1 - parser.cpp parser.hpp parser.ypp has edited">
       <created>1577295942466</created>
@@ -112,6 +130,19 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="mileStone 1 - parser.cpp parser.hpp parser.ypp has edited" />
     <MESSAGE value="mileStone 1 - parser.cpp parser.hpp parser.ypp modified" />
@@ -122,34 +153,41 @@
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="728" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577295795793" />
-    <state x="560" y="150" width="860" height="814" key="CommitChangelistDialog2" timestamp="1577307985992">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state x="2429" y="126" width="860" height="814" key="CommitChangelistDialog2" timestamp="1577483876013">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2429" y="126" width="860" height="814" key="CommitChangelistDialog2/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577483876013" />
     <state x="560" y="150" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577307985992" />
-    <state x="170" y="127" width="1650" height="853" key="DiffContextDialog" timestamp="1577307975013">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state x="2024" y="103" width="1536" height="901" key="DiffContextDialog" timestamp="1577483856432">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2024" y="103" width="1536" height="901" key="DiffContextDialog/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577483856432" />
     <state x="170" y="127" width="1650" height="853" key="DiffContextDialog/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577307975013" />
-    <state x="778" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1577279209601">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state x="2655" y="291" width="424" height="491" key="FileChooserDialogImpl" timestamp="1577457667523">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2655" y="291" key="FileChooserDialogImpl/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577457667523" />
     <state x="778" y="311" width="424" height="491" key="FileChooserDialogImpl/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577279209601" />
-    <state width="1804" height="251" key="GridCell.Tab.0.bottom" timestamp="1577307955861">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1804" height="251" key="GridCell.Tab.0.bottom" timestamp="1577460868758">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1804" height="251" key="GridCell.Tab.0.bottom/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577307955861" />
-    <state width="1804" height="251" key="GridCell.Tab.0.center" timestamp="1577307955861">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1804" height="251" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577460868758" />
+    <state width="1804" height="251" key="GridCell.Tab.0.bottom/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577444700670" />
+    <state width="1804" height="251" key="GridCell.Tab.0.center" timestamp="1577460868758">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1804" height="251" key="GridCell.Tab.0.center/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577307955861" />
-    <state width="1804" height="251" key="GridCell.Tab.0.left" timestamp="1577307955861">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1804" height="251" key="GridCell.Tab.0.center/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577460868758" />
+    <state width="1804" height="251" key="GridCell.Tab.0.center/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577444700670" />
+    <state width="1804" height="251" key="GridCell.Tab.0.left" timestamp="1577460868757">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1804" height="251" key="GridCell.Tab.0.left/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577307955861" />
-    <state width="1804" height="251" key="GridCell.Tab.0.right" timestamp="1577307955861">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1804" height="251" key="GridCell.Tab.0.left/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577460868757" />
+    <state width="1804" height="251" key="GridCell.Tab.0.left/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577444700669" />
+    <state width="1804" height="251" key="GridCell.Tab.0.right" timestamp="1577460868758">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1804" height="251" key="GridCell.Tab.0.right/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577307955861" />
+    <state width="1804" height="251" key="GridCell.Tab.0.right/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577460868758" />
+    <state width="1804" height="251" key="GridCell.Tab.0.right/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577444700670" />
     <state width="1804" height="340" key="GridCell.Tab.1.bottom" timestamp="1577307798509">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
@@ -174,13 +212,31 @@
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="786" y="266" width="408" height="581" key="RollbackChangesDialog/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577281583830" />
+    <state x="2404" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1577483537099">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2404" y="188" width="1022" height="737" key="SettingsEditor/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577483537099" />
     <state x="590" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1577307930140">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="590" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577307930140" />
+    <state x="603" y="744" key="com.intellij.ide.util.TipDialog" timestamp="1577457708562">
+      <screen x="0" y="381" width="1920" height="1080" />
+    </state>
+    <state x="603" y="744" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577457708562" />
+    <state x="651" y="381" key="com.intellij.ide.util.TipDialog/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577444418426" />
+    <state x="2639" y="457" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577458565667">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2639" y="457" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577458565667" />
+    <state x="763" y="473" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577444449112" />
     <state x="739" y="197" width="501" height="720" key="refactoring.ChangeSignatureDialog" timestamp="1577306484225">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="739" y="197" width="501" height="720" key="refactoring.ChangeSignatureDialog/70.27.1850.1053/1920.539.1920.1080@70.27.1850.1053" timestamp="1577306484225" />
+    <state x="2578" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1577483507716">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2578" y="259" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.381.1920.1080@1920.0.1920.1080" timestamp="1577483507716" />
   </component>
 </project>

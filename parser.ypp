@@ -115,7 +115,7 @@ RetType : Type { printRule("RetType type ");
 Formals : %empty { printRule("Formals1 ");
          $$ = new FormalsNode(); }
     | FormalsList { printRule("Formals2 ");
-         $$ = new FormalsNode((FormalsListNode*)$1);
+         $$ = new FormalsNode(((FormalsListNode*)$1)->types, ((FormalsListNode*)$1)->names, $1->lineno);
       }
 ;
 

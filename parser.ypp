@@ -328,7 +328,8 @@ MarkerWhileOn : %empty { printRule("MarkerWhileOn");
         symbolTable.newInnerScope(true /*isWhileScope*/); }
 ;
 
-ExpList : Exp { printRule("ExpList");  }
+ExpList : Exp { printRule("ExpList");
+   $$ = new ExpListNode(((ExpNode*)$1)->type, $1->lineno);}
     | Exp COMMA ExpList { printRule("ExpList");
                             $$ = $3;
                             ((ExpListNode*)$$)->add(((ExpNode*)$1)->type);

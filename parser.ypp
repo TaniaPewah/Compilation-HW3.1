@@ -73,7 +73,7 @@ Funcs : %empty
     | FuncDecl Funcs { printRule("Funcs ");}
 ;
 
-FuncDecl : RetType ID { printRule("FuncDecl ");}
+FuncDecl : RetType ID { printRule("FuncDecl ");
 		if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
 			output::errorDef($2->lineno, ((IdNode*)$2)->name);
 			exit(0);

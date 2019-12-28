@@ -359,10 +359,13 @@ public:
     }
 
     void addVar(string name, Types type) {
+
+        //cout << "adding var inside scope: " << name << " to scope: " << functionName << endl;
         entries.push_back(TableEntry(name, type, nextOffset++));
     }
 
     void addArg(string name, Types type) {
+        //cout << "adding args inside scope: " << name << " to scope: " << functionName << endl;
         entries.push_back(TableEntry(name, type, nextArgOffset--));
     }
 
@@ -444,6 +447,9 @@ public:
     }
 
     bool addVar(IdNode *id, Types type) {
+
+        //cout << "adding var: " << id->name << " to scope: " << stack[0].functionName << endl;
+
         if (stack[0].isExists(id->name)) {
             output::errorDef(id->lineno, id->name);
             return false;

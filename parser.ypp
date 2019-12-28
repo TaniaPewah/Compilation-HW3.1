@@ -148,7 +148,7 @@ FormalDecl : Type ID
                     output::errorDef($2->lineno, ((IdNode*)$2)->name);
                     exit(0);
                 }
-                exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
+                
                 $$ = new FormalDeclNode(((TypeNode*)$1)->type, ((IdNode*)$2)->name, $2->lineno);
             }
 ;

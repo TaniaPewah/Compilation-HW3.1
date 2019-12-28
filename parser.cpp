@@ -22,6 +22,7 @@ string typeToString(Types type) {
 
 vector<string> typeToStringVector(vector<Types>& types) {
     vector<string> returnVector;
+
     for (int i = 0; i < types.size(); i++) {
         returnVector.push_back(typeToString(types[i]));
     }

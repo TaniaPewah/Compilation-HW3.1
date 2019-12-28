@@ -8,7 +8,7 @@
   	extern int yylex();
 	extern int yylineno;
 	int yyerror(char const*);
-	void printRule(char const*);
+  void printRule(char const*);
 	void printStringRule(string);
     SymbolTable symbolTable;
     void checkOpTypes(Node*, Node*, int);
@@ -71,30 +71,31 @@ Program : Enums Funcs {
 ;
 
 Funcs : %empty
-    | FuncDecl Funcs { printRule("Funcs ");}
+    | FuncDecl Funcs { }
 ;
 
 FuncDecl : RetType ID {
-            printRule("FuncDecl ");
+            
 
             if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                 output::errorDef($2->lineno, ((IdNode*)$2)->name);
                 exit(0);
 			}
 		}  LPAREN Formals RPAREN {
-		    printRule("FuncDecl2 oi");
-		    printStringRule(((IdNode*)$2)->name);
-            symbolTable.addFunction(((IdNode*)$2), ((TypeNode*)$1)->type, ((FormalsNode*)$5)->types, ((FormalsNode*)$5)->names);
-            printRule("FuncDecl2 - 2");
+		    
+		   		    //TODO ask guy why we dont need exit on false
+            exitOnFalse(symbolTable.addFunction(((IdNode*)$2), ((TypeNode*)$1)->type, ((FormalsNode*)$5)->types, ((FormalsNode*)$5)->names));
+
+            
 			$$ = new StatementNode();
 		}  LBRACE Statements RBRACE { symbolTable.endScope(); }
 ;
 
 Enums : %empty
-    | EnumDecl Enums {printRule("Enums ");}
+    | EnumDecl Enums {}
 ;
 
-EnumDecl : ENUM ID {  printRule("EnumDecl ");
+EnumDecl : ENUM ID {  
                     if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                            output::errorDef($2->lineno, ((IdNode*)$2)->name);
                            exit(0);
@@ -106,32 +107,31 @@ EnumDecl : ENUM ID {  printRule("EnumDecl ");
                        }
 ;
 
-RetType : Type { printRule("RetType type ");
+RetType : Type { 
                 $$ = $1; }
-        | VOID { printRule("RetType void");
+        | VOID { 
                 $$ = $1; }
 ;
 
-Formals : %empty { printRule("Formals1 ");
+Formals : %empty { 
          $$ = new FormalsNode(); }
-    | FormalsList { printRule("Formals2 ");
+    | FormalsList { 
          $$ = new FormalsNode(((FormalsListNode*)$1)->types, ((FormalsListNode*)$1)->names, $1->lineno);
       }
 ;
 
-FormalsList : FormalDecl { printRule("FormalsList1 ");
-                            printStringRule(((FormalDeclNode*)$1)->name);
-                            printStringRule(typeToString(((FormalDeclNode*)$1)->type));
+FormalsList : FormalDecl { 
+                            
                 $$ = new FormalsListNode(((FormalDeclNode*)$1)->type, ((FormalDeclNode*)$1)->name, $1->lineno);
             }
-        | FormalDecl COMMA FormalsList { printRule("FormalsList2 ");
+        | FormalDecl COMMA FormalsList { 
                 $$ = $3;
                 ((FormalsListNode*)$$)->add(((FormalDeclNode*)$1)->type, ((FormalDeclNode*)$1)->name, $1->lineno);
             }
 ;
 
 FormalDecl : Type ID
-            { printRule("FormalDecl ");
+            { 
                 if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                     output::errorDef($2->lineno, ((IdNode*)$2)->name);
                     exit(0);
@@ -142,32 +142,31 @@ FormalDecl : Type ID
 ;
 
 
-EnumeratorList : Enumerator { printRule("Enumerator list ");
+EnumeratorList : Enumerator { 
                             $$ = new EnumeratorListNode(((EnumeratorNode*)$1)->name, $1->lineno);
                         }
-    | EnumeratorList COMMA Enumerator { printRule("Enumerator list ");
+    | EnumeratorList COMMA Enumerator { 
                                     $$ = $3;
                                     ((EnumeratorListNode*)$$)->add(((EnumeratorNode*)$1)->name, $1->lineno);
                                 }
 ;
 
-Enumerator : ID {   printRule("Enumerator ");
+Enumerator : ID {   
                     $$ = new EnumeratorNode(((IdNode*)$1)->name, $1->lineno);
                 }
 ;
 
 
-Statements : Statement { printRule("Statements ");
+Statements : Statement { 
                         $$ = $1; }
-        | Statements Statement { printRule("Statements ");
+        | Statements Statement { 
                         $$ = $2; }
 ;
 
-Statement : LBRACE { printRule("Statement open scope");
-            symbolTable.newInnerScope();}
-			Statements RBRACE { printRule("Statement end scope");
-			symbolTable.endScope(); }
-			| Type ID SC { printRule("Statement decl id ");
+Statement : LBRACE MarkerNewInnerScope Statements RBRACE { 
+			symbolTable.endScope(); 
+      $$ = $2;}
+			| Type ID SC { 
                     if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                         output::errorDef($2->lineno, ((IdNode*)$2)->name);
                         exit(0);
@@ -175,7 +174,7 @@ Statement : LBRACE { printRule("Statement open scope");
 
                     exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                  }
-			| EnumType ID SC { printRule("Statement enumdecl id ");
+			| EnumType ID SC { 
                          if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                              output::errorDef($2->lineno, ((IdNode*)$2)->name);
                              exit(0);
@@ -183,10 +182,10 @@ Statement : LBRACE { printRule("Statement open scope");
 
                          exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                      }
-			| EnumDecl { printRule("Statement enum decl");
+			| EnumDecl { 
                      $$ = $1;
                }
-			| Type ID ASSIGN Exp SC { printRule("Statement decl id assign");
+			| Type ID ASSIGN Exp SC { 
                           if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                               output::errorDef($2->lineno, ((IdNode*)$2)->name);
                               exit(0);
@@ -201,7 +200,7 @@ Statement : LBRACE { printRule("Statement open scope");
                           exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                           $$ = new StatementNode();
                           }
-			| EnumType ID ASSIGN Exp SC { printRule("Statement enum id assign");
+			| EnumType ID ASSIGN Exp SC { 
                                   if (symbolTable.isAlreadyDefined(((IdNode*)$2)->name)) {
                                       output::errorDef($2->lineno, ((IdNode*)$2)->name);
                                       exit(0);
@@ -216,7 +215,7 @@ Statement : LBRACE { printRule("Statement open scope");
                                   exitOnFalse(symbolTable.addVar((IdNode*)$2, ((TypeNode*)$1)->type));
                                   $$ = new StatementNode();
                                 }
-			| ID ASSIGN Exp SC { printRule("Statement id assign");
+			| ID ASSIGN Exp SC { 
                            if (!symbolTable.isDefinedVar(((IdNode*)$1)->name)) {
                                output::errorUndef($1->lineno, ((IdNode*)$1)->name);
                                exit(0);
@@ -231,9 +230,9 @@ Statement : LBRACE { printRule("Statement open scope");
 
                            $$ =  new StatementNode();
                        }
-			| Call SC { printRule("Statement call");
+			| Call SC { 
 			    $$ = new StatementNode(); }
-			| RETURN SC { printRule("Statement return");
+			| RETURN SC { 
                     if (symbolTable.getCurrentFunctionRetType() != VOID_TYPE) {
                         output::errorMismatch($1->lineno);
                         exit(0);
@@ -241,7 +240,7 @@ Statement : LBRACE { printRule("Statement open scope");
 
                     $$ = new StatementNode();
                 }
-			| RETURN Exp SC { printRule("Statement return exp");
+			| RETURN Exp SC { 
                         Types retType = symbolTable.getCurrentFunctionRetType();
                         if ((retType != ((ExpNode*)$2)->type && !(retType == INT_TYPE && ((ExpNode*)$2)->type == BYTE_TYPE)) || retType == VOID_TYPE) {
                             output::errorMismatch($1->lineno);
@@ -250,25 +249,23 @@ Statement : LBRACE { printRule("Statement open scope");
 
                         $$ = new StatementNode();
                     }
-			| IfScope %prec NO_ELSE { printRule("Statement IfScope"); }
-			| IfScope ELSE {printRule("Statement IfScope");
-			    symbolTable.newInnerScope();}
-				Statement {
-
+			| IfScope %prec NO_ELSE { 
+      $$ = $1; }
+			| IfScope ELSE MarkerNewInnerScope Statement {
 					   symbolTable.endScope();
-					   $$ = $4;
+					   $$ = $1;
 					}
-			| WHILE MarkerWhileOn BoolCond Statement { printRule("Statement WHILE");
+			| WHILE  BoolCond MarkerWhileOn Statement { 
 			                                            symbolTable.endScope();
                                                           $$ = $4; }
-			| BREAK SC { printRule("Statement break");
+			| BREAK SC { 
                    if (symbolTable.isInWhile() == false) {
                        output::errorUnexpectedBreak($1->lineno);
                        exit(0);
                    }
                    $$ = new StatementNode();
                }
-			| CONTINUE SC { printRule("IfScope");
+			| CONTINUE SC { 
                       if (symbolTable.isInWhile() == false) {
                           output::errorUnexpectedContinue($1->lineno);
                           exit(0);
@@ -277,14 +274,14 @@ Statement : LBRACE { printRule("Statement open scope");
                   }
 ;
 
-IfScope : IF BoolCond Statement{ printRule("IfScope");
+IfScope : IF BoolCond MarkerNewInnerScope Statement{ 
 		symbolTable.endScope();
-		$$ = $3;
+		$$ = $4;
 		}
 
 
 BoolCond :  LPAREN Exp RPAREN
-	   {    printRule("BoolCond");
+	   {    
 		   if (((ExpNode*)$2)->type != BOOL_TYPE) {
 			   output::errorMismatch($2->lineno);
 			   exit(0);
@@ -293,7 +290,7 @@ BoolCond :  LPAREN Exp RPAREN
 ;
 
 Call : ID LPAREN ExpList RPAREN
-		{   printRule("Call");
+		{   
 			if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
 				output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
 				exit(0);
@@ -309,7 +306,7 @@ Call : ID LPAREN ExpList RPAREN
 			$$ = new CallNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
 		}
 	| ID LPAREN RPAREN
-		{ printRule("Call");
+		{ 
 			if (!symbolTable.isDefinedFunction(((IdNode*)$1)->name)) {
 				output::errorUndefFunc($1->lineno, ((IdNode*)$1)->name);
 				exit(0);
@@ -327,27 +324,23 @@ Call : ID LPAREN ExpList RPAREN
 ;
 
 
-MarkerWhileOn : %empty { printRule("MarkerWhileOn");
-        symbolTable.newInnerScope(true /*isWhileScope*/); }
-;
-
-ExpList : Exp { printRule("ExpList");
+ExpList : Exp { 
    $$ = new ExpListNode(((ExpNode*)$1)->type, $1->lineno);}
-    | Exp COMMA ExpList { printRule("ExpList");
+    | Exp COMMA ExpList { 
                             $$ = $3;
                             ((ExpListNode*)$$)->add(((ExpNode*)$1)->type);
                         }
 ;
 
-Type : INT {printRule("Int");
+Type : INT {
         $$ = $1; }
-    | BYTE {printRule("Byte");
+    | BYTE {
         $$ = $1; }
-    | BOOL {printRule("Bool");
+    | BOOL {
         $$ = $1; }
 ;
 
-EnumType : ENUM ID {printRule("EnumType");
+EnumType : ENUM ID {
 		if (!symbolTable.isEnumDefined(((IdNode*)$2)->name)) {
 			output::errorUndefEnum($2->lineno, ((IdNode*)$2)->name);
 			exit(0);
@@ -356,60 +349,66 @@ EnumType : ENUM ID {printRule("EnumType");
    }
 ;
 
-Exp : LPAREN Exp RPAREN {printRule("Exp");
+Exp : LPAREN Exp RPAREN {
         $$ = $2; }
-    | Exp ADD Exp {printRule("Exp");
+    | Exp ADD Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (BinopNode*)$2); }
-    | Exp SUB Exp {printRule("Exp");
+    | Exp SUB Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (BinopNode*)$2); }
-    | Exp MUL Exp {printRule("Exp");
+    | Exp MUL Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (BinopNode*)$2); }
-    | Exp DIV Exp {printRule("Exp");
+    | Exp DIV Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (BinopNode*)$2); }
-    | ID {printRule("Exp");
+    | ID {
         if (!symbolTable.isDefinedVar(((IdNode*)$1)->name)) {
                output::errorUndef($1->lineno, ((IdNode*)$1)->name);
                exit(0);
            }
            $$ = new ExpNode(symbolTable.getType(((IdNode*)$1)->name), $1->lineno);
          }
-    | Call {printRule("Exp");
+    | Call {
         $$ = new ExpNode(((CallNode*)$1)->type, $1->lineno); }
-    | NUM {printRule("Exp");
+    | NUM {
         $$ = new ExpNode(INT_TYPE, $1->lineno); }
-    | NUM B {printRule("Exp");
+    | NUM B {
                 if (((NumNode*)$1)->num > 255) {
                     output::errorByteTooLarge($1->lineno, ((NumNode*)$1)->getAsString());
                     exit(0);
                 }
                 $$ = new ExpNode(BYTE_TYPE, $1->lineno);
             }
-    | STRING {printRule("Exp");
+    | STRING {
         $$ = new ExpNode(STRING_TYPE, $1->lineno); }
-    | TRUE {printRule("Exp");
+    | TRUE {
         $$ = new ExpNode(BOOL_TYPE, $1->lineno); }
-    | FALSE {printRule("Exp");
+    | FALSE {
         $$ = new ExpNode(BOOL_TYPE, $1->lineno); }
-    | NOT Exp {printRule("Exp");
+    | NOT Exp {
         $$ = new ExpNode(((ExpNode*)$2)->type, ((ExpNode*)$2)->type, $2->lineno, (RelopNode*)$1); }
-    | Exp AND Exp {printRule("Exp");
+    | Exp AND Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | Exp OR Exp {printRule("Exp");
+    | Exp OR Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | Exp EQUAL Exp {printRule("Exp");
+    | Exp EQUAL Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | Exp NOTEQUAL Exp {printRule("Exp");
+    | Exp NOTEQUAL Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | Exp LESS Exp {printRule("Exp");
+    | Exp LESS Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | Exp GREATER Exp {printRule("Exp");
+    | Exp GREATER Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | Exp LESSEQUAL Exp {printRule("Exp");
+    | Exp LESSEQUAL Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | Exp GREATEREQUAL Exp {printRule("Exp");
+    | Exp GREATEREQUAL Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
-    | LPAREN Type RPAREN Exp {printRule("Exp");
+    | LPAREN Type RPAREN Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
+
+MarkerNewInnerScope : %empty{ symbolTable.newInnerScope(); }
+MarkerWhileOn : %empty{ 
+        symbolTable.newInnerScope(true /*isWhileScope*/); }
+
+;
 
 %%
 
@@ -427,7 +426,6 @@ int yyerror(char const* message)
 }
 
 void exitOnFalse(bool b) {
-    cout << "exitOnFalse - bool = " << b << endl;
     if (!b) {
         exit(0);
     }

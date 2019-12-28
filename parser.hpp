@@ -262,7 +262,8 @@ public:
 
     TableEntry(string name, Types returnType, int offset, vector<Types> argTypes) : name(name), type(returnType),
                                                                                     offset(offset), isFunction(true),
-                                                                                    argTypes(argTypes) {};
+                                                                                    argTypes(argTypes) {
+    };
 
     TableEntry(string name, int offset, vector<string> enumVals) : name(name), offset(offset), type(ENUM_TYPE),
                                                                    isFunction(true), enumVals(enumVals) {};
@@ -276,10 +277,10 @@ private:
 
     vector<TableEntry> entries;
     int nextArgOffset;
-    string functionName;
+
 
 public:
-
+    string functionName;
     bool isFunctionScope;
     bool isInnerScope;
     bool isWhileScope;
@@ -303,11 +304,13 @@ public:
 
         for (auto & entry : entries) {
             if (entry.isFunction) {
+                
                 string retType = typeToString(entry.type);
                 vector<string> argTypes = typeToStringVector(entry.argTypes);
                 string functionType = output::makeFunctionType(retType, argTypes);
                 output::printID(entry.name, entry.offset, functionType);
             } else {
+            
                 output::printID(entry.name, entry.offset, typeToString(entry.type));
             }
         }
@@ -334,7 +337,13 @@ public:
     }
 
     void addFunction(string name, Types returnType, vector<Types> argTypes) {
-        entries.push_back(TableEntry(name, returnType, 0, argTypes));
+       
+        TableEntry te = TableEntry(name, returnType, 0, argTypes);
+
+ 
+        // TODO here is the cause of one problem
+        entries.push_back(te);
+        
     }
 
     void addEnum(string name, vector<string> enumVals) {
@@ -377,13 +386,14 @@ public:
     }
 
     bool addFunction(IdNode *id, Types returnType, vector<Types> argTypes, vector<string> argNames) {
+         
         if (id->name == "main" && returnType == VOID_TYPE && argTypes.size() == 0) {
             this->hasMain = true;
-        }
+        }  
 
         // Add function to current scope
         stack[0].addFunction(id->name, returnType, argTypes);
-
+        
         // Open function's scope
         this->newFunctionScope(id->name);
 
@@ -391,6 +401,7 @@ public:
         for (int i = 0; i < argTypes.size(); i++) { // argTypes and argNames are same size
             if (id->name == argNames[i] || stack[0].isExists(id->name)) {
                 output::errorDef(id->lineno, id->name);
+                
                 return false;
             }
             if (argTypes[i] == ENUM_TYPE) {
@@ -398,7 +409,6 @@ public:
             }
             stack[0].addArg(argNames[i], argTypes[i]);
         }
-
         return true;
     }
 

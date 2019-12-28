@@ -390,17 +390,17 @@ Exp : LPAREN Exp RPAREN {
     | Exp OR Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
     | Exp EQUAL Exp {
-        $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
+        $$ = new ExpNode(BOOL_TYPE, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
     | Exp NOTEQUAL Exp {
-        $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
+        $$ = new ExpNode(BOOL_TYPE, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
     | Exp LESS Exp {
-        $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
+        $$ = new ExpNode(BOOL_TYPE, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
     | Exp GREATER Exp {
-        $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
+        $$ = new ExpNode(BOOL_TYPE, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
     | Exp LESSEQUAL Exp {
-        $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
+        $$ = new ExpNode(BOOL_TYPE, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
     | Exp GREATEREQUAL Exp {
-        $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
+        $$ = new ExpNode(BOOL_TYPE, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
     | LPAREN Type RPAREN Exp {
         $$ = new ExpNode(((ExpNode*)$1)->type, ((ExpNode*)$3)->type, $2->lineno, (RelopNode*)$2); }
 

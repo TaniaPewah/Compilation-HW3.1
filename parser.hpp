@@ -159,10 +159,13 @@ public:
     vector<string> enums;
 
     EnumeratorListNode(string enumVal, int lineno) : Node(lineno) {
+        //cout << "inside new EnumeratorListNode" << endl;
         enums.insert(enums.begin(), enumVal);
+        //cout << "after insertion" << endl;
     }
 
     bool add(string enumVal, int lineno) {
+        //cout << "inside EnumeratorListNode add" << endl;
         for (auto &it : enums) {
             // check if already defined
             if (enumVal == it) {
@@ -171,15 +174,15 @@ public:
             }
         }
         enums.insert(enums.begin(), enumVal);
+        //cout << "after add insertion" << endl;
         return true;
     }
 };
 
-class EnumDeclNode : public Node {
+class EnumsNode : public Node {
 public:
     string name;
-
-    EnumDeclNode(string enumName, int lineno) : Node(lineno), name(enumName) {}
+    EnumsNode(string enumName, int lineno) : Node(lineno), name(enumName) {}
 };
 
 
@@ -238,7 +241,10 @@ public:
     FormalsNode() : Node(NA), isEmpty(true) {};
 
     FormalsNode(vector<Types> types, vector<string> names, int lineno) : Node(lineno), types(types), names(names),
-                                                                         isEmpty(false) {};
+                                                                         isEmpty(false) {
+
+                                                                            //cout<< "new FormalsNode created" << endl; 
+                                                                         };
 };
 
 string typeToString(Types type);
@@ -347,6 +353,8 @@ public:
     }
 
     void addEnum(string name, vector<string> enumVals) {
+
+        //cout << "adding enum to scope entries: "<< name << endl;
         entries.push_back(TableEntry(name, 0, enumVals));
     }
 
@@ -387,7 +395,10 @@ public:
 
     bool addFunction(IdNode *id, Types returnType, vector<Types> argTypes, vector<string> argNames) {
          
+        //cout << "adding func to symbolTable top scope" << endl;
+
         if (id->name == "main" && returnType == VOID_TYPE && argTypes.size() == 0) {
+
             this->hasMain = true;
         }  
 
@@ -414,16 +425,20 @@ public:
 
     bool addEnum(IdNode *id, vector<string> enumVals) {
 
-        // Add Enum to current scope
-        stack[0].addEnum(id->name, enumVals);
+        //cout << "adding enum to symbolTable top scope" << endl;
 
         // Add all enum vals to the current scope
         for (int i = 0; i < enumVals.size(); i++) { // argTypes and argNames are same size
             if (id->name == enumVals[i] || stack[0].isExists(id->name)) {
+
+                //cout << "enum error def" << endl;
                 output::errorDef(id->lineno, id->name);
                 return false;
             }
-        }
+        } 
+
+        // Add Enum to current scope
+        stack[0].addEnum(id->name, enumVals);
 
         return true;
     }

@@ -14,6 +14,8 @@ string typeToString(Types type) {
             return "STRING";
         case VOID_TYPE:
             return "VOID";
+        case ENUM_TYPE:
+            return "ENUM";
         default:
             string exceptionMessage("typeToString non-exhaustive");
             throw (semErr(exceptionMessage));
